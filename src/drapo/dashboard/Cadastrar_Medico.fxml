@@ -67,21 +67,21 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <CheckBox alignment="TOP_CENTER" layoutX="288.0" layoutY="212.0" mnemonicParsing="false" text="Seg" textAlignment="CENTER" />
-            <CheckBox alignment="TOP_CENTER" layoutX="338.0" layoutY="212.0" mnemonicParsing="false" text="Ter" textAlignment="CENTER" />
-            <CheckBox alignment="TOP_CENTER" layoutX="387.0" layoutY="212.0" mnemonicParsing="false" text="Qua" textAlignment="CENTER" />
-            <CheckBox alignment="TOP_CENTER" layoutX="440.0" layoutY="212.0" mnemonicParsing="false" text="Qui" textAlignment="CENTER" />
-            <CheckBox alignment="TOP_CENTER" layoutX="490.0" layoutY="212.0" mnemonicParsing="false" text="Sex" textAlignment="CENTER" />
-            <CheckBox alignment="TOP_CENTER" layoutX="540.0" layoutY="212.0" mnemonicParsing="false" text="Sab" textAlignment="CENTER" />
-            <CheckBox alignment="TOP_CENTER" layoutX="590.0" layoutY="212.0" mnemonicParsing="false" text="Dom" textAlignment="CENTER" />
-            <ChoiceBox fx:id="choicebox_hora" layoutX="58.0" layoutY="210.0" prefHeight="25.0" prefWidth="52.0" />
-            <ChoiceBox layoutX="120.0" layoutY="210.0" prefHeight="25.0" prefWidth="52.0" />
-            <ChoiceBox layoutX="182.0" layoutY="210.0" prefHeight="25.0" prefWidth="41.0" />
-            <TextField layoutX="58.0" layoutY="137.0" prefHeight="25.0" prefWidth="167.0" />
-            <ChoiceBox layoutX="287.0" layoutY="137.0" prefHeight="25.0" prefWidth="167.0" />
-            <RadioButton layoutX="530.0" layoutY="141.0" mnemonicParsing="false" text="15min" />
-            <RadioButton layoutX="594.0" layoutY="141.0" mnemonicParsing="false" text="20min" />
-            <RadioButton layoutX="658.0" layoutY="141.0" mnemonicParsing="false" text="30min" />
+            <CheckBox alignment="TOP_CENTER" layoutX="289.0" layoutY="212.0" mnemonicParsing="false" text="Seg" textAlignment="CENTER" />
+            <CheckBox alignment="TOP_CENTER" layoutX="339.0" layoutY="212.0" mnemonicParsing="false" text="Ter" textAlignment="CENTER" />
+            <CheckBox alignment="TOP_CENTER" layoutX="388.0" layoutY="212.0" mnemonicParsing="false" text="Qua" textAlignment="CENTER" />
+            <CheckBox alignment="TOP_CENTER" layoutX="441.0" layoutY="212.0" mnemonicParsing="false" text="Qui" textAlignment="CENTER" />
+            <CheckBox alignment="TOP_CENTER" layoutX="491.0" layoutY="212.0" mnemonicParsing="false" text="Sex" textAlignment="CENTER" />
+            <CheckBox alignment="TOP_CENTER" layoutX="541.0" layoutY="212.0" mnemonicParsing="false" text="Sab" textAlignment="CENTER" />
+            <CheckBox alignment="TOP_CENTER" layoutX="591.0" layoutY="212.0" mnemonicParsing="false" text="Dom" textAlignment="CENTER" />
+            <ChoiceBox fx:id="choicebox_hora" layoutX="63.0" layoutY="210.0" prefHeight="25.0" prefWidth="52.0" />
+            <ChoiceBox layoutX="125.0" layoutY="210.0" prefHeight="25.0" prefWidth="52.0" />
+            <ChoiceBox layoutX="187.0" layoutY="210.0" prefHeight="25.0" prefWidth="41.0" />
+            <TextField layoutX="63.0" layoutY="137.0" prefHeight="25.0" prefWidth="167.0" />
+            <ChoiceBox layoutX="286.0" layoutY="137.0" prefHeight="25.0" prefWidth="167.0" />
+            <RadioButton layoutX="528.0" layoutY="141.0" mnemonicParsing="false" text="15min" />
+            <RadioButton layoutX="592.0" layoutY="141.0" mnemonicParsing="false" text="20min" />
+            <RadioButton layoutX="656.0" layoutY="141.0" mnemonicParsing="false" text="30min" />
          </children>
          <effect>
             <DropShadow color="#d7d2d2" height="50.0" radius="24.5" width="50.0" />
