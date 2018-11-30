@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="399.0" prefWidth="949.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane layoutX="29.0" layoutY="22.0" prefHeight="338.0" prefWidth="896.0" style="-fx-background-color: #ffffff;">
+         <children>
+            <ImageView fitHeight="70.0" fitWidth="76.0" layoutX="41.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/icons8_500px_64px.png" />
+               </image>
+            </ImageView>
+            <Separator layoutX="41.0" layoutY="94.0" prefHeight="0.0" prefWidth="763.0" />
+            <Label layoutX="123.0" layoutY="18.0" text="Cadastro de um novo médico" textFill="#3a1c9d">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="51.0" layoutY="113.0" text="MÉDICO" textFill="#aeacac">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="51.0" layoutY="186.0" text="HORÁRIO DE TRABALHO" textFill="#aeacac">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="279.0" layoutY="113.0" text="ESPECIALIDADE" textFill="#aeacac">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="279.0" layoutY="186.0" text="DIAS DA SEMANA" textFill="#aeacac">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="520.0" layoutY="113.0" text="TEMPO DE CONSULTA" textFill="#aeacac">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Pane layoutY="269.0" prefHeight="70.0" prefWidth="896.0" style="-fx-background-color: #F0F0F0;">
+               <children>
+                  <Label layoutX="52.0" layoutY="26.0" text="Salvar" textFill="#504df2">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Label layoutX="123.0" layoutY="51.0" text="Adicione um novo médico ao sistema" textFill="#b2b0b0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <CheckBox alignment="TOP_CENTER" layoutX="288.0" layoutY="212.0" mnemonicParsing="false" text="Seg" textAlignment="CENTER" />
+            <CheckBox alignment="TOP_CENTER" layoutX="338.0" layoutY="212.0" mnemonicParsing="false" text="Ter" textAlignment="CENTER" />
+            <CheckBox alignment="TOP_CENTER" layoutX="387.0" layoutY="212.0" mnemonicParsing="false" text="Qua" textAlignment="CENTER" />
+            <CheckBox alignment="TOP_CENTER" layoutX="440.0" layoutY="212.0" mnemonicParsing="false" text="Qui" textAlignment="CENTER" />
+            <CheckBox alignment="TOP_CENTER" layoutX="490.0" layoutY="212.0" mnemonicParsing="false" text="Sex" textAlignment="CENTER" />
+            <CheckBox alignment="TOP_CENTER" layoutX="540.0" layoutY="212.0" mnemonicParsing="false" text="Sab" textAlignment="CENTER" />
+            <CheckBox alignment="TOP_CENTER" layoutX="590.0" layoutY="212.0" mnemonicParsing="false" text="Dom" textAlignment="CENTER" />
+            <ChoiceBox fx:id="choicebox_hora" layoutX="58.0" layoutY="210.0" prefHeight="25.0" prefWidth="52.0" />
+            <ChoiceBox layoutX="120.0" layoutY="210.0" prefHeight="25.0" prefWidth="52.0" />
+            <ChoiceBox layoutX="182.0" layoutY="210.0" prefHeight="25.0" prefWidth="41.0" />
+            <TextField layoutX="58.0" layoutY="137.0" prefHeight="25.0" prefWidth="167.0" />
+            <ChoiceBox layoutX="287.0" layoutY="137.0" prefHeight="25.0" prefWidth="167.0" />
+            <RadioButton layoutX="530.0" layoutY="141.0" mnemonicParsing="false" text="15min" />
+            <RadioButton layoutX="594.0" layoutY="141.0" mnemonicParsing="false" text="20min" />
+            <RadioButton layoutX="658.0" layoutY="141.0" mnemonicParsing="false" text="30min" />
+         </children>
+         <effect>
+            <DropShadow color="#d7d2d2" height="50.0" radius="24.5" width="50.0" />
+         </effect>
+      </Pane>
+   </children>
+</AnchorPane>
