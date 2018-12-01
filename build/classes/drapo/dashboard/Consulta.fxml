@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -10,7 +11,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="399.0" prefWidth="949.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="AnchorPane" prefHeight="399.0" prefWidth="949.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="drapo.dashboard.ConsultaController">
    <children>
       <Pane layoutX="29.0" layoutY="22.0" prefHeight="338.0" prefWidth="896.0" style="-fx-background-color: #ffffff;">
          <children>
@@ -45,22 +46,22 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label layoutX="58.0" layoutY="139.0" text="Samuel Aguiar" textFill="#4d4c4c">
+            <Label fx:id="entradaCliente" layoutX="58.0" layoutY="139.0" text="Samuel Aguiar" textFill="#4d4c4c">
                <font>
                   <Font size="13.0" />
                </font>
             </Label>
-            <Label layoutX="287.0" layoutY="139.0" text="R$1.000,00" textFill="#4d4c4c">
+            <Label fx:id="entradaValor" layoutX="287.0" layoutY="139.0" text="R$1.000,00" textFill="#4d4c4c">
                <font>
                   <Font size="13.0" />
                </font>
             </Label>
-            <Label layoutX="287.0" layoutY="211.0" text="Convênio" textFill="#4d4c4c">
+            <Label fx:id="entradaExame" layoutX="287.0" layoutY="211.0" text="Convênio" textFill="#4d4c4c">
                <font>
                   <Font size="13.0" />
                </font>
             </Label>
-            <Label layoutX="58.0" layoutY="211.0" text="Helton Tosse" textFill="#4d4c4c">
+            <Label fx:id="entradaMedico" layoutX="58.0" layoutY="211.0" text="Helton Tosse" textFill="#4d4c4c">
                <font>
                   <Font size="13.0" />
                </font>
@@ -88,7 +89,7 @@
             <Pane layoutY="269.0" prefHeight="70.0" prefWidth="896.0" style="-fx-background-color: #F0F0F0;">
                <children>
                   <Separator layoutX="95.0" layoutY="22.0" orientation="VERTICAL" prefHeight="27.0" prefWidth="6.0" />
-                  <Button layoutX="35.0" layoutY="21.0" mnemonicParsing="false" text="Editar" textFill="#504df2">
+                  <Button fx:id="botaoEditar" layoutX="35.0" layoutY="21.0" mnemonicParsing="false" onAction="#botao_editar" text="Editar" textFill="#504df2">
                      <font>
                         <Font size="13.0" />
                      </font>
@@ -125,6 +126,10 @@
                   <Font size="14.0" />
                </font>
             </Label>
+            <TextField fx:id="edicaoCliente" layoutX="49.0" layoutY="136.0" />
+            <TextField fx:id="edicaoMedico" layoutX="49.0" layoutY="208.0" />
+            <TextField fx:id="edicaoValor" layoutX="275.0" layoutY="136.0" />
+            <TextField fx:id="edicaoExame" layoutX="275.0" layoutY="208.0" />
          </children>
          <effect>
             <DropShadow color="#d7d2d2" height="50.0" radius="24.5" width="50.0" />
