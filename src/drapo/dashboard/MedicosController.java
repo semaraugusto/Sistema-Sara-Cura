@@ -26,13 +26,9 @@ public class MedicosController implements Initializable {
     private int cbSelected = 0;
     List<String> medicosNomes = new ArrayList<String>();
     List<String> medicosEspecialidades = new ArrayList<String>();
-    String horasInicio[] = { "07:00", "08:00", "09:00", "10:00", "11:00", "12:00" };
-    String horasFim[] = { "15:00", "16:00", "17:00", "18:00", "19:00", "20:00" };
+    String horas[] = { "07:00-13:00", "08:00-14:00", "09:00-15:00", "10:00-16:00", "11:00-17:00", "12:00-18:00" };
     
     @FXML private TextField textfield_nome;
-    
-    @FXML private ChoiceBox choicebox_horaInicio;
-    @FXML private ChoiceBox choicebox_horaFim;
     
     @FXML private RadioButton rb_15;
     @FXML private RadioButton rb_20;
@@ -47,6 +43,7 @@ public class MedicosController implements Initializable {
     @FXML private CheckBox cb_dom;
     
     @FXML private ComboBox cb_especialidades;
+    @FXML private ComboBox cb_hora;
     
     @FXML
     private void especialidades_enter_press(KeyEvent event){
@@ -94,8 +91,7 @@ public class MedicosController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        choicebox_horaInicio.setItems(FXCollections.observableArrayList(horasInicio));
-        choicebox_horaFim.setItems(FXCollections.observableArrayList(horasFim));
+        cb_hora.setItems(FXCollections.observableArrayList(horas));
     }   
     
 }
