@@ -17,6 +17,7 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.input.*;
+import javax.swing.*;
 /**
  *
  * @author Henrique
@@ -25,7 +26,7 @@ public class MedicosController implements Initializable {
     
     private int cbSelected = 0;
     List<String> medicosEspecialidades = new ArrayList<String>();
-    String horas[] = { "07:00-13:00", "08:00-14:00", "09:00-15:00", "10:00-16:00", "11:00-17:00", "12:00-18:00" };
+    String horas[] = { "07:00-13:00", "08:00-14:00", "09:00-15:00", "10:00-16:00", "11:00-17:00", "12:00-18:00", "13:00-19:00", "14:00-20:00" };
     List<Medico> medicos = new ArrayList<Medico>();
     
     @FXML private TextField textfield_nome;
@@ -55,24 +56,34 @@ public class MedicosController implements Initializable {
     }
     
     private boolean entradaOK(int tempo, int horario, boolean dias[], String nome, List<String> especialidades){
-        if(tempo == -1)
+        if(tempo == -1){
+            JOptionPane.showMessageDialog(null, "Tempo de consulta não foi selecionado.");
             return false;
+        }
         
-        if(horario == -1)
+        if(horario == -1){
+            JOptionPane.showMessageDialog(null, "Horário de trabalho não foi selecionado.");
             return false;
+        }
         
         int cntDias=0;
         for(boolean dia : dias)
             if(dia)
                 cntDias++;
-        if(cntDias != 3)
+        if(cntDias != 3){
+            JOptionPane.showMessageDialog(null, "Os três dias de trabalho não foram selecionados.");
             return false;
+        }
         
-        if(Objects.equals("", nome))
+        if(Objects.equals("", nome)){
+            JOptionPane.showMessageDialog(null, "Nome não foi inserido.");
             return false;
+        }
         
-        if(especialidades.isEmpty())
+        if(especialidades.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Nenhuma especialidade foi inserida.");
             return false;
+        }
         
         return true;
     }
@@ -91,7 +102,7 @@ public class MedicosController implements Initializable {
         else if(rb_30.isSelected())
             tempo = 30;
         
-        for(i=0;i<6;i++)
+        for(i=0;i<8;i++)
             if(cb_hora.getValue() == horas[i]){
                 horario = i;
                 break;
@@ -122,8 +133,6 @@ public class MedicosController implements Initializable {
         if(entradaOK(tempo, horario, dias, nome, especialidades)){
             Medico novo = new Medico(tempo, horario, dias, nome, especialidades);
             System.out.println(novo.toString());
-        }else{
-            System.out.println("DEU MERDA");
         }
     }
     
