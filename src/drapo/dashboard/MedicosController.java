@@ -57,12 +57,12 @@ public class MedicosController implements Initializable {
     
     private boolean entradaOK(int tempo, int horario, boolean dias[], String nome, List<String> especialidades){
         if(tempo == -1){
-            JOptionPane.showMessageDialog(null, "Tempo de consulta não foi selecionado.");
+            JOptionPane.showMessageDialog(null, "O tempo de consulta não foi selecionado.", "Dados inconsistentes", JOptionPane.ERROR_MESSAGE);
             return false;
         }
         
         if(horario == -1){
-            JOptionPane.showMessageDialog(null, "Horário de trabalho não foi selecionado.");
+            JOptionPane.showMessageDialog(null, "O horário de trabalho não foi estabelecido.", "Dados inconsistentes", JOptionPane.ERROR_MESSAGE);
             return false;
         }
         
@@ -71,21 +71,41 @@ public class MedicosController implements Initializable {
             if(dia)
                 cntDias++;
         if(cntDias != 3){
-            JOptionPane.showMessageDialog(null, "Os três dias de trabalho não foram selecionados.");
+            JOptionPane.showMessageDialog(null, "Os três dias de trabalho não foram selecionados.", "Dados inconsistentes", JOptionPane.ERROR_MESSAGE);
             return false;
         }
         
         if(Objects.equals("", nome)){
-            JOptionPane.showMessageDialog(null, "Nome não foi inserido.");
+            JOptionPane.showMessageDialog(null, "O nome do médico não foi inserido.", "Dados inconsistentes", JOptionPane.ERROR_MESSAGE);
             return false;
         }
         
         if(especialidades.isEmpty()){
-            JOptionPane.showMessageDialog(null, "Nenhuma especialidade foi inserida.");
+            JOptionPane.showMessageDialog(null, "Nenhuma especialidade foi inserida.", "Dados inconsistentes", JOptionPane.ERROR_MESSAGE);
             return false;
         }
         
         return true;
+    }
+    
+    private void limpaCampos(){
+        textfield_nome.setText("");
+        
+        cb_especialidades.getItems().clear();
+        
+        cb_hora.setValue("");
+        
+        rb_15.setSelected(false);
+        rb_20.setSelected(false);
+        rb_30.setSelected(false);
+        
+        cb_seg.setSelected(false);
+        cb_ter.setSelected(false);
+        cb_qua.setSelected(false);
+        cb_qui.setSelected(false);
+        cb_sex.setSelected(false);
+        cb_sab.setSelected(false);
+        cb_dom.setSelected(false);
     }
     
     @FXML
@@ -132,7 +152,8 @@ public class MedicosController implements Initializable {
         
         if(entradaOK(tempo, horario, dias, nome, especialidades)){
             Medico novo = new Medico(tempo, horario, dias, nome, especialidades);
-            System.out.println(novo.toString());
+            JOptionPane.showMessageDialog(null, "O médico " + nome + " foi cadastrado com sucesso!", "Sucesso", JOptionPane.PLAIN_MESSAGE);
+            limpaCampos();
         }
     }
     
