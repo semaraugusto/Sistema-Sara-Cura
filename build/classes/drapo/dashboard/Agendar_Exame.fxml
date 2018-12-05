@@ -49,7 +49,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label layoutX="520.0" layoutY="113.0" text="VALOR" textFill="#aeacac">
+            <Label layoutX="520.0" layoutY="113.0" text="DATA" textFill="#aeacac">
                <font>
                   <Font size="14.0" />
                </font>
@@ -72,7 +72,7 @@
             <TextField layoutX="287.0" layoutY="137.0" prefHeight="25.0" prefWidth="167.0" />
             <ComboBox layoutX="287.0" layoutY="213.0" prefHeight="25.0" prefWidth="167.0" />
             <TextField layoutX="528.0" layoutY="137.0" prefHeight="25.0" prefWidth="167.0" />
-            <Label layoutX="520.0" layoutY="186.0" text="DATA E HORÁRIO" textFill="#aeacac">
+            <Label layoutX="520.0" layoutY="186.0" text="HORÁRIO" textFill="#aeacac">
                <font>
                   <Font size="14.0" />
                </font>
@@ -93,16 +93,11 @@
                   <Font size="13.0" />
                </font>
             </RadioButton>
-            <Label layoutX="522.0" layoutY="420.0" text="VERIFICAÇÃO" textFill="#aeacac">
+            <Label layoutX="522.0" layoutY="420.0" text="VALOR" textFill="#aeacac">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Button layoutX="531.0" layoutY="443.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="166.0" text="Verificar" textFill="#109410">
-               <font>
-                  <Font size="13.0" />
-               </font>
-            </Button>
             <RadioButton layoutX="65.0" layoutY="448.0" mnemonicParsing="false" text="Cheque">
                <font>
                   <Font size="13.0" />
@@ -130,6 +125,9 @@
                   <Font size="14.0" />
                </font>
             </Label>
+            <TextField layoutX="528.0" layoutY="445.0" prefHeight="25.0" prefWidth="167.0" />
+            <ComboBox fx:id="cb_medico1" layoutX="529.0" layoutY="213.0" prefHeight="25.0" prefWidth="78.0" />
+            <ComboBox fx:id="cb_medico11" layoutX="617.0" layoutY="213.0" prefHeight="25.0" prefWidth="78.0" />
          </children>
          <effect>
             <DropShadow color="#d7d2d2" height="50.0" radius="24.5" width="50.0" />
