@@ -6,6 +6,7 @@
 package drapo.dashboard;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -14,9 +15,11 @@ import java.util.List;
  */
 public class Medico {
     boolean dias[];
+    boolean horarios[];
     int tempo, horario;
     String nome;
     List<String> especialidades;
+    List<String> datas;
     
     Medico(int tempo, int horario, boolean dias[], String nome, List<String> especialidades){
         this.tempo = tempo;
@@ -24,6 +27,9 @@ public class Medico {
         this.dias = dias;
         this.nome = nome;
         this.especialidades = especialidades;
+        this.horarios = new boolean[360/horario];
+        Arrays.fill(this.horarios, Boolean.TRUE);
+        this.datas = new ArrayList<>();
     }
     
     @Override

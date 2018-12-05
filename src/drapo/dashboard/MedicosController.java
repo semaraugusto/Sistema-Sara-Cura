@@ -113,7 +113,7 @@ public class MedicosController implements Initializable {
         int tempo=-1, horario=-1, i;
         boolean dias[] = new boolean[7];
         String nome = "";
-        List<String> especialidades = new ArrayList<String>();
+        List<String> especialidades = new ArrayList<>();
         
         if(rb_15.isSelected())
             tempo = 15;
@@ -153,6 +153,7 @@ public class MedicosController implements Initializable {
         if(entradaOK(tempo, horario, dias, nome, especialidades)){
             Medico novo = new Medico(tempo, horario, dias, nome, especialidades);
             JOptionPane.showMessageDialog(null, "O médico " + nome + " foi cadastrado com sucesso!", "Sucesso", JOptionPane.PLAIN_MESSAGE);
+            System.out.println(novo);
             limpaCampos();
         }
     }
