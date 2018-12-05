@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="509.0" prefWidth="949.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="AnchorPane" prefHeight="509.0" prefWidth="949.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="drapo.dashboard.Agendar_ConsultaController">
    <children>
       <Pane layoutX="29.0" layoutY="22.0" prefHeight="461.0" prefWidth="896.0" style="-fx-background-color: #ffffff;">
          <children>
@@ -55,7 +55,7 @@
             </Label>
             <Pane layoutY="391.0" prefHeight="70.0" prefWidth="896.0" style="-fx-background-color: #F0F0F0;">
                <children>
-                  <Button layoutX="35.0" layoutY="21.0" mnemonicParsing="false" text="Agendar" textFill="#504df2">
+                  <Button layoutX="35.0" layoutY="21.0" mnemonicParsing="false" onAction="#agendar_clique" text="Agendar" textFill="#504df2">
                      <font>
                         <Font size="13.0" />
                      </font></Button>
@@ -66,37 +66,37 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <TextField layoutX="63.0" layoutY="137.0" prefHeight="25.0" prefWidth="167.0" />
-            <ComboBox layoutX="63.0" layoutY="217.0" prefHeight="25.0" prefWidth="167.0" />
-            <TextField layoutX="287.0" layoutY="137.0" prefHeight="25.0" prefWidth="167.0" />
-            <ComboBox layoutX="287.0" layoutY="217.0" prefHeight="25.0" prefWidth="167.0" />
-            <TextField layoutX="528.0" layoutY="137.0" prefHeight="25.0" prefWidth="167.0" />
-            <RadioButton layoutX="463.0" layoutY="281.0" mnemonicParsing="false" text="Convênio">
+            <TextField fx:id="tf_cliente" layoutX="63.0" layoutY="137.0" prefHeight="25.0" prefWidth="167.0" />
+            <ComboBox fx:id="cb_especialidade" layoutX="63.0" layoutY="217.0" prefHeight="25.0" prefWidth="167.0" />
+            <TextField fx:id="tf_telefone" layoutX="287.0" layoutY="137.0" prefHeight="25.0" prefWidth="167.0" />
+            <ComboBox fx:id="cb_medico" layoutX="287.0" layoutY="217.0" prefHeight="25.0" prefWidth="167.0" />
+            <TextField fx:id="tf_valor" layoutX="528.0" layoutY="137.0" prefHeight="25.0" prefWidth="167.0" />
+            <RadioButton fx:id="rb_convenio" layoutX="463.0" layoutY="281.0" mnemonicParsing="false" onAction="#convenio_clique" text="Convênio">
                <font>
                   <Font size="13.0" />
                </font>
             </RadioButton>
-            <RadioButton layoutX="342.0" layoutY="281.0" mnemonicParsing="false" text="Particular">
+            <RadioButton fx:id="rb_particular" layoutX="342.0" layoutY="281.0" mnemonicParsing="false" onAction="#particular_clique" text="Particular">
                <font>
                   <Font size="13.0" />
                </font>
             </RadioButton>
-            <Label layoutX="51.0" layoutY="321.0" text="NOME DO CONVÊNIO" textFill="#aeacac">
+            <Label fx:id="label_convenio" layoutX="51.0" layoutY="321.0" text="NOME DO CONVÊNIO" textFill="#aeacac" visible="false">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <RadioButton layoutX="60.0" layoutY="347.0" mnemonicParsing="false" text="Cheque">
+            <RadioButton fx:id="rb_cheque" layoutX="60.0" layoutY="347.0" mnemonicParsing="false" text="Cheque" visible="false">
                <font>
                   <Font size="13.0" />
                </font>
             </RadioButton>
-            <RadioButton layoutX="137.0" layoutY="347.0" mnemonicParsing="false" text="Cartão de crédito/débito">
+            <RadioButton fx:id="rb_cartao" layoutX="137.0" layoutY="347.0" mnemonicParsing="false" text="Cartão de crédito/débito" visible="false">
                <font>
                   <Font size="13.0" />
                </font>
             </RadioButton>
-            <RadioButton layoutX="312.0" layoutY="347.0" mnemonicParsing="false" text="Dinheiro">
+            <RadioButton fx:id="rb_dinheiro" layoutX="312.0" layoutY="347.0" mnemonicParsing="false" text="Dinheiro" visible="false">
                <font>
                   <Font size="13.0" />
                </font>
@@ -106,14 +106,14 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <Button layoutX="529.0" layoutY="343.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="166.0" text="Verificar" textFill="#109410">
+            <Button layoutX="529.0" layoutY="343.0" mnemonicParsing="false" onAction="#verificar_clique" prefHeight="29.0" prefWidth="166.0" text="Verificar" textFill="#109410">
                <font>
                   <Font size="13.0" />
                </font>
             </Button>
-            <TextField layoutX="54.0" layoutY="345.0" prefHeight="25.0" prefWidth="167.0" />
-            <TextField layoutX="283.0" layoutY="344.0" prefHeight="25.0" prefWidth="167.0" />
-            <Label layoutX="277.0" layoutY="321.0" text="MATRÍCULA" textFill="#aeacac">
+            <TextField fx:id="tf_convenio" layoutX="54.0" layoutY="345.0" prefHeight="25.0" prefWidth="167.0" visible="false" />
+            <TextField fx:id="tf_matricula" layoutX="283.0" layoutY="344.0" prefHeight="25.0" prefWidth="167.0" visible="false" />
+            <Label fx:id="label_matricula" layoutX="277.0" layoutY="321.0" text="MATRÍCULA" textFill="#aeacac" visible="false">
                <font>
                   <Font size="14.0" />
                </font>
