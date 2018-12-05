@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="509.0" prefWidth="949.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="drapo.dashboard.Agendar_ConsultaController">
+<AnchorPane id="AnchorPane" prefHeight="509.0" prefWidth="949.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="drapo.dashboard.Agendar_ConsultaController">
    <children>
       <Pane layoutX="29.0" layoutY="22.0" prefHeight="461.0" prefWidth="896.0" style="-fx-background-color: #ffffff;">
          <children>
@@ -28,7 +28,7 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Label layoutX="51.0" layoutY="113.0" text="CLIENTE" textFill="#aeacac">
+            <Label layoutX="51.0" layoutY="113.0" text="PACIENTE" textFill="#aeacac">
                <font>
                   <Font size="14.0" />
                </font>

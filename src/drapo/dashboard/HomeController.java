@@ -58,7 +58,7 @@ public class HomeController implements Initializable {
     }
     @FXML
     private void painel_cadastrar_equipamento(ActionEvent event) {            
-        pnl_scroll.getChildren().clear();
+        cadastrar_equipamento();
     }
     
     @Override
@@ -111,6 +111,19 @@ public class HomeController implements Initializable {
         Node node;
         try {
             node = (Node)FXMLLoader.load(getClass().getResource("Cadastrar_Medico.fxml"));
+            pnl_scroll.getChildren().add(node);
+                
+        } catch (IOException ex) {
+            Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    private void cadastrar_equipamento()
+    {
+        pnl_scroll.getChildren().clear();
+        
+        Node node;
+        try {
+            node = (Node)FXMLLoader.load(getClass().getResource("Cadastrar_Equipamento.fxml"));
             pnl_scroll.getChildren().add(node);
                 
         } catch (IOException ex) {

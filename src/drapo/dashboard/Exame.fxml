@@ -32,7 +32,7 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Label layoutX="51.0" layoutY="113.0" text="CLIENTE" textFill="#aeacac">
+            <Label layoutX="51.0" layoutY="113.0" text="PACIENTE" textFill="#aeacac">
                <font>
                   <Font size="14.0" />
                </font>
