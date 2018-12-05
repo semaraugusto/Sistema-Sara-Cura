@@ -67,9 +67,9 @@
                </font>
             </Label>
             <TextField fx:id="tf_cliente" layoutX="63.0" layoutY="137.0" prefHeight="25.0" prefWidth="167.0" />
-            <ComboBox fx:id="cb_especialidade" layoutX="63.0" layoutY="217.0" prefHeight="25.0" prefWidth="167.0" />
+            <ComboBox fx:id="cb_especialidade" layoutX="63.0" layoutY="211.0" prefHeight="25.0" prefWidth="167.0" />
             <TextField fx:id="tf_telefone" layoutX="287.0" layoutY="137.0" prefHeight="25.0" prefWidth="167.0" />
-            <ComboBox fx:id="cb_medico" layoutX="287.0" layoutY="217.0" prefHeight="25.0" prefWidth="167.0" />
+            <ComboBox fx:id="cb_medico" layoutX="287.0" layoutY="211.0" prefHeight="25.0" prefWidth="167.0" />
             <TextField fx:id="tf_valor" layoutX="528.0" layoutY="137.0" prefHeight="25.0" prefWidth="167.0" />
             <RadioButton fx:id="rb_convenio" layoutX="463.0" layoutY="281.0" mnemonicParsing="false" onAction="#convenio_clique" text="Convênio">
                <font>

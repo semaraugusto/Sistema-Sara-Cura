@@ -42,7 +42,7 @@ public class HomeController implements Initializable {
     }
     @FXML
     private void painel_agendar_exame(ActionEvent event) {            
-        pnl_scroll.getChildren().clear();
+        agendar_exame();
     }
     @FXML
     private void painel_pesquisar_consulta(ActionEvent event) {            
@@ -137,6 +137,19 @@ public class HomeController implements Initializable {
         Node node;
         try {
             node = (Node)FXMLLoader.load(getClass().getResource("Agendar_Consulta.fxml"));
+            pnl_scroll.getChildren().add(node);
+                
+        } catch (IOException ex) {
+            Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    private void agendar_exame()
+    {
+        pnl_scroll.getChildren().clear();
+        
+        Node node;
+        try {
+            node = (Node)FXMLLoader.load(getClass().getResource("Agendar_Exame.fxml"));
             pnl_scroll.getChildren().add(node);
                 
         } catch (IOException ex) {
