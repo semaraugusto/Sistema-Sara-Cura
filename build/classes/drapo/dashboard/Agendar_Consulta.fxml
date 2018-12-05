@@ -13,9 +13,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="509.0" prefWidth="949.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="drapo.dashboard.Agendar_ConsultaController">
+<AnchorPane id="AnchorPane" prefHeight="509.0" prefWidth="949.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="drapo.dashboard.Agendar_ConsultaController">
    <children>
-      <Pane layoutX="29.0" layoutY="22.0" prefHeight="461.0" prefWidth="896.0" style="-fx-background-color: #ffffff;">
+      <Pane layoutX="39.0" layoutY="24.0" prefHeight="461.0" prefWidth="896.0" style="-fx-background-color: #ffffff;">
          <children>
             <ImageView fitHeight="70.0" fitWidth="76.0" layoutX="41.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -28,7 +28,7 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Label layoutX="51.0" layoutY="113.0" text="CLIENTE" textFill="#aeacac">
+            <Label layoutX="51.0" layoutY="113.0" text="PACIENTE" textFill="#aeacac">
                <font>
                   <Font size="14.0" />
                </font>
@@ -48,7 +48,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label layoutX="520.0" layoutY="113.0" text="VALOR" textFill="#aeacac">
+            <Label layoutX="520.0" layoutY="113.0" text="DATA" textFill="#aeacac">
                <font>
                   <Font size="14.0" />
                </font>
@@ -67,10 +67,10 @@
                </font>
             </Label>
             <TextField fx:id="tf_cliente" layoutX="63.0" layoutY="137.0" prefHeight="25.0" prefWidth="167.0" />
-            <ComboBox fx:id="cb_especialidade" layoutX="63.0" layoutY="217.0" prefHeight="25.0" prefWidth="167.0" />
+            <ComboBox fx:id="cb_especialidade" layoutX="63.0" layoutY="211.0" prefHeight="25.0" prefWidth="167.0" />
             <TextField fx:id="tf_telefone" layoutX="287.0" layoutY="137.0" prefHeight="25.0" prefWidth="167.0" />
-            <ComboBox fx:id="cb_medico" layoutX="287.0" layoutY="217.0" prefHeight="25.0" prefWidth="167.0" />
-            <TextField fx:id="tf_valor" layoutX="528.0" layoutY="137.0" prefHeight="25.0" prefWidth="167.0" />
+            <ComboBox fx:id="cb_medico" layoutX="287.0" layoutY="211.0" prefHeight="25.0" prefWidth="167.0" />
+            <TextField layoutX="528.0" layoutY="137.0" prefHeight="25.0" prefWidth="166.0" />
             <RadioButton fx:id="rb_convenio" layoutX="463.0" layoutY="281.0" mnemonicParsing="false" onAction="#convenio_clique" text="Convênio">
                <font>
                   <Font size="13.0" />
@@ -101,16 +101,11 @@
                   <Font size="13.0" />
                </font>
             </RadioButton>
-            <Label layoutX="520.0" layoutY="320.0" text="VERIFICAÇÃO" textFill="#aeacac">
+            <Label layoutX="520.0" layoutY="320.0" text="VALOR" textFill="#aeacac">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Button layoutX="529.0" layoutY="343.0" mnemonicParsing="false" onAction="#verificar_clique" prefHeight="29.0" prefWidth="166.0" text="Verificar" textFill="#109410">
-               <font>
-                  <Font size="13.0" />
-               </font>
-            </Button>
             <TextField fx:id="tf_convenio" layoutX="54.0" layoutY="345.0" prefHeight="25.0" prefWidth="167.0" visible="false" />
             <TextField fx:id="tf_matricula" layoutX="283.0" layoutY="344.0" prefHeight="25.0" prefWidth="167.0" visible="false" />
             <Label fx:id="label_matricula" layoutX="277.0" layoutY="321.0" text="MATRÍCULA" textFill="#aeacac" visible="false">
@@ -118,11 +113,14 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label layoutX="520.0" layoutY="186.0" text="DATA E HORÁRIO" textFill="#aeacac">
+            <Label layoutX="520.0" layoutY="186.0" text="HORÁRIO" textFill="#aeacac">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
+            <ComboBox fx:id="cb_medico1" layoutX="529.0" layoutY="211.0" prefHeight="25.0" prefWidth="78.0" />
+            <ComboBox fx:id="cb_medico11" layoutX="617.0" layoutY="211.0" prefHeight="25.0" prefWidth="78.0" />
+            <TextField fx:id="tf_valor1" layoutX="528.0" layoutY="345.0" prefHeight="25.0" prefWidth="166.0" />
          </children>
          <effect>
             <DropShadow color="#d7d2d2" height="50.0" radius="24.5" width="50.0" />
