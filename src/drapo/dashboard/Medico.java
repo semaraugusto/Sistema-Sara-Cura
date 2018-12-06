@@ -14,12 +14,16 @@ import java.util.List;
  * @author Henrique
  */
 public class Medico {
+    public class DiaTrabalho {
+        String data;
+        boolean horarios[];
+    }
+    
     boolean dias[];
-    boolean horarios[];
     int tempo, horario;
     String nome;
     List<String> especialidades;
-    List<String> datas;
+    List<DiaTrabalho> agenda;
     
     Medico(int tempo, int horario, boolean dias[], String nome, List<String> especialidades){
         this.tempo = tempo;
@@ -27,9 +31,12 @@ public class Medico {
         this.dias = dias;
         this.nome = nome;
         this.especialidades = especialidades;
-        this.horarios = new boolean[360/horario];
-        Arrays.fill(this.horarios, Boolean.TRUE);
-        this.datas = new ArrayList<>();
+        this.agenda = new ArrayList<>();
+    }
+
+    public boolean marcaConsulta(){
+        System.out.println("marcaConsulta");
+        return true;
     }
     
     @Override

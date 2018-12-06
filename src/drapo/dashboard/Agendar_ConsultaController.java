@@ -8,6 +8,8 @@ package drapo.dashboard;
 import java.net.URL;
 import java.util.*;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -130,8 +132,69 @@ public class Agendar_ConsultaController implements Initializable {
         return true;
     }
     
+    private boolean formatoDataOK(String data){
+        if(data.length() != 10)
+            return false;
+        if(!Objects.equals(data.charAt(2),'/') || !Objects.equals(data.charAt(5),'/'))
+            return false;
+        if(!Character.isDigit(data.charAt(0)) || !Character.isDigit(data.charAt(1)))
+            return false;
+        if(!Character.isDigit(data.charAt(3)) || !Character.isDigit(data.charAt(4)))
+            return false;
+        if(!Character.isDigit(data.charAt(6)) || !Character.isDigit(data.charAt(7)) || !Character.isDigit(data.charAt(8)) || !Character.isDigit(data.charAt(9)))
+            return false;
+        
+        return true;
+    }
+    
+    private int congruenciaZeller(int dia, int mes, int ano){
+        if(mes == 1){
+            mes = 13;
+            ano--;
+        }else if(mes == 2){
+            mes = 14;
+            ano--;
+        }
+        int q = dia;
+        int m = mes;
+        int k = ano%100;
+        int j = ano/100;
+        int h = q + 13*(m+1)/5 + k + k/4 + j/4 + 5*j;
+        h = h%7;
+        
+//            case 0 : cout << "Saturday \n"; break; 
+//            case 1 : cout << "Sunday \n"; break; 
+//            case 2 : cout << "Monday \n"; break; 
+//            case 3 : cout << "Tuesday \n"; break; 
+//            case 4 : cout << "Wednesday \n"; break; 
+//            case 5 : cout << "Thursday \n"; break; 
+//            case 6 : cout << "Friday \n"; break; 
+
+        return h;
+    }
+    
+    private boolean dataOK(String data, boolean dias[]){
+        if(formatoDataOK(data)){
+            String nomeDias[] = {"Sábado", "Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta"};
+            int dia = Integer.parseInt(data.substring(0,2));
+            int mes = Integer.parseInt(data.substring(3,5));
+            int ano = Integer.parseInt(data.substring(6));
+            int diaSemana = congruenciaZeller(dia, mes, ano);
+            System.out.println(diaSemana);
+            if(dias[diaSemana]){
+                return true;
+            }else{
+                JOptionPane.showMessageDialog(null, "A data inserida é " + nomeDias[diaSemana] + " e o médico selecionado...", "Dados inconsistentes", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "O formato de data usado está incorreto (usar dd/mm/aaaa).", "Dados inconsistentes", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+    }
+    
     @FXML
-    private void verificar_clique(){
+    private void agendar_clique(){
         if(entradaOK()){
             if(rb_particular.isSelected()){
                 try{
@@ -143,6 +206,18 @@ public class Agendar_ConsultaController implements Initializable {
             }else{
                 try{
                     verificar_convenio();
+                    Medico med = null;
+                    
+                    for(Medico it : HomeController.medicos)
+                        if(Objects.equals(it.nome, cb_medico.getValue()))
+                            med = it;
+                    
+                    if(med != null){
+                        if(dataOK(tf_data.getText(), med.dias))
+                            med.marcaConsulta();
+                    }else{
+                        JOptionPane.showMessageDialog(null, "Médico não cadastrado.", "Dados inconsistentes", JOptionPane.ERROR_MESSAGE);
+                    }                    
                 }catch(Exception e){
                     JOptionPane.showMessageDialog(null, "Autorização pelo convênio " + tf_convenio.getText() + " para o cliente " + tf_cliente.getText() + " negada.", "Pagamento inconsistente", JOptionPane.ERROR_MESSAGE);
                     limpaCampos();
@@ -151,14 +226,19 @@ public class Agendar_ConsultaController implements Initializable {
         }
     }
     
-    @FXML
-    private void agendar_clique(){
-    
-    }
-    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        List<String> medicos = new ArrayList<>();
+        List<String> especialidades = new ArrayList<>();
+        
+        for(Medico it : HomeController.medicos){
+            medicos.add(it.nome);
+            for(String itt : it.especialidades)
+                especialidades.add(itt);
+        }
+        cb_medico.setItems(FXCollections.observableArrayList(medicos));
+        cb_especialidade.setItems(FXCollections.observableArrayList(especialidades));
     }    
     
 }

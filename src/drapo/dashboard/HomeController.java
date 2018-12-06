@@ -6,6 +6,8 @@
 package drapo.dashboard;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,6 +26,9 @@ import javafx.scene.layout.VBox;
  * @author oXCToo
  */
 public class HomeController implements Initializable {    
+    
+    public static JSON dadosMedicos;
+    public static List<Medico> medicos;
     
     ObservableList<String> choicebox_hora_lista = FXCollections.observableArrayList("01", "02", "03");
     
@@ -63,6 +68,8 @@ public class HomeController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        dadosMedicos = new JSON("medicos.json");
+        medicos = new ArrayList<>();
         // TODO
     }    
     
