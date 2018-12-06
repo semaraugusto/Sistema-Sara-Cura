@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="509.0" prefWidth="949.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="drapo.dashboard.Agendar_ConsultaController">
+<AnchorPane id="AnchorPane" prefHeight="509.0" prefWidth="949.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="drapo.dashboard.Agendar_ConsultaController">
    <children>
       <Pane layoutX="39.0" layoutY="24.0" prefHeight="461.0" prefWidth="896.0" style="-fx-background-color: #ffffff;">
          <children>
@@ -70,7 +70,7 @@
             <ComboBox fx:id="cb_especialidade" layoutX="63.0" layoutY="211.0" prefHeight="25.0" prefWidth="167.0" />
             <TextField fx:id="tf_telefone" layoutX="287.0" layoutY="137.0" prefHeight="25.0" prefWidth="167.0" />
             <ComboBox fx:id="cb_medico" layoutX="287.0" layoutY="211.0" prefHeight="25.0" prefWidth="167.0" />
-            <TextField layoutX="528.0" layoutY="137.0" prefHeight="25.0" prefWidth="166.0" />
+            <TextField fx:id="tf_data" layoutX="528.0" layoutY="137.0" prefHeight="25.0" prefWidth="166.0" />
             <RadioButton fx:id="rb_convenio" layoutX="463.0" layoutY="281.0" mnemonicParsing="false" onAction="#convenio_clique" text="Convênio">
                <font>
                   <Font size="13.0" />
@@ -118,9 +118,9 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <ComboBox fx:id="cb_medico1" layoutX="529.0" layoutY="211.0" prefHeight="25.0" prefWidth="78.0" />
-            <ComboBox fx:id="cb_medico11" layoutX="617.0" layoutY="211.0" prefHeight="25.0" prefWidth="78.0" />
-            <TextField fx:id="tf_valor1" layoutX="528.0" layoutY="345.0" prefHeight="25.0" prefWidth="166.0" />
+            <ComboBox fx:id="cb_hora" layoutX="529.0" layoutY="211.0" prefHeight="25.0" prefWidth="78.0" />
+            <ComboBox fx:id="cb_min" layoutX="617.0" layoutY="211.0" prefHeight="25.0" prefWidth="78.0" />
+            <TextField fx:id="tf_valor" layoutX="528.0" layoutY="345.0" prefHeight="25.0" prefWidth="166.0" />
          </children>
          <effect>
             <DropShadow color="#d7d2d2" height="50.0" radius="24.5" width="50.0" />

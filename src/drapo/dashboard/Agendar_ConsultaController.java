@@ -34,9 +34,12 @@ public class Agendar_ConsultaController implements Initializable {
     @FXML private TextField tf_cliente;
     @FXML private TextField tf_telefone;
     @FXML private TextField tf_valor;
+    @FXML private TextField tf_data; 
     
     @FXML private ComboBox cb_especialidade;
     @FXML private ComboBox cb_medico;
+    @FXML private ComboBox cb_hora;
+    @FXML private ComboBox cb_min;
     
     @FXML
     private void particular_clique(){
