@@ -36,7 +36,7 @@ public class Medico {
     public String toString(){
         String outString = "";
         
-        outString += "Nome: " + this.nome + ", Especialidades: ";
+        outString += "{nome: " + this.nome + ", Especialidades: ";
         
         for(String item : this.especialidades)
             outString += item + ", ";

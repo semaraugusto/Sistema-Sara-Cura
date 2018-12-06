@@ -153,6 +153,7 @@ public class MedicosController implements Initializable {
         if(entradaOK(tempo, horario, dias, nome, especialidades)){
             Medico novo = new Medico(tempo, horario, dias, nome, especialidades);
             JOptionPane.showMessageDialog(null, "O médico " + nome + " foi cadastrado com sucesso!", "Sucesso", JOptionPane.PLAIN_MESSAGE);
+            HomeController.medicos.escreveMedico(novo);
             System.out.println(novo);
             limpaCampos();
         }
@@ -189,6 +190,7 @@ public class MedicosController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        
         cb_hora.setItems(FXCollections.observableArrayList(horas));
     }   
     

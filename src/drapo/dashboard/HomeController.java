@@ -4,6 +4,9 @@
  * and open the template in the editor.
  */
 package drapo.dashboard;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -19,11 +22,16 @@ import javafx.scene.Node;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 /**
  *
  * @author oXCToo
  */
 public class HomeController implements Initializable {    
+    
+    public static JSON medicos;
     
     ObservableList<String> choicebox_hora_lista = FXCollections.observableArrayList("01", "02", "03");
     
@@ -63,6 +71,7 @@ public class HomeController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        medicos = new JSON("medicos.json");
         // TODO
     }    
     
