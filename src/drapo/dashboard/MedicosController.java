@@ -27,7 +27,6 @@ public class MedicosController implements Initializable {
     private int cbSelected = 0;
     List<String> medicosEspecialidades = new ArrayList<String>();
     String horas[] = { "07:00-13:00", "08:00-14:00", "09:00-15:00", "10:00-16:00", "11:00-17:00", "12:00-18:00", "13:00-19:00", "14:00-20:00" };
-    List<Medico> medicos = new ArrayList<Medico>();
     
     @FXML private TextField textfield_nome;
     
@@ -156,6 +155,8 @@ public class MedicosController implements Initializable {
             HomeController.medicos.add(novo);
             System.out.println(novo);
             limpaCampos();
+            medicosEspecialidades.clear();
+            cbSelected = 0;
         }
     }
     

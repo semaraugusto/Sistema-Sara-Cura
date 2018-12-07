@@ -8,17 +8,13 @@ package drapo.dashboard;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 /**
  *
  * @author Henrique
  */
-public class Medico {
-    public class DiaTrabalho {
-        String data;
-        boolean horarios[];
-    }
-    
+public class Medico {    
     boolean dias[];
     int tempo, horario;
     String nome;
@@ -34,9 +30,58 @@ public class Medico {
         this.agenda = new ArrayList<>();
     }
 
-    public boolean marcaConsulta(){
-        System.out.println("marcaConsulta");
-        return true;
+    public void marcaConsulta(String data, String hora, String min){
+        String arrMin15[] = {"00", "15", "30", "45"};
+        String arrMin20[] = {"00", "20", "40"};
+        String arrMin30[] = {"00", "30"};
+        String arrHora[] = {"07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19"};
+        int indexHora=0, indexMin=0, horaAtual, minAtual;
+        boolean dataNaoUsada = true;
+        
+        if(this.tempo == 15){
+            minAtual = 0;
+            for(String imin : arrMin15){
+                if(Objects.equals(imin, min))
+                    indexMin = minAtual;
+                minAtual++;
+            }
+        }else if(this.tempo == 20){
+            minAtual = 0;
+            for(String imin : arrMin20){
+                if(Objects.equals(imin, min))
+                    indexMin = minAtual;
+                minAtual++;
+            }
+        }else{
+            minAtual = 0;
+            for(String imin : arrMin30){
+                if(Objects.equals(imin, min))
+                    indexMin = minAtual;
+                minAtual++;
+            }
+        }
+        
+        horaAtual = this.horario;
+        for(String ihora : arrHora){
+            if(Objects.equals(ihora, hora))
+                indexHora = horaAtual - this.horario;
+            horaAtual++;
+        }
+        
+        for(DiaTrabalho dia : this.agenda){
+            if(Objects.equals(dia.data, data)){
+                dia.horarios[indexHora][indexMin] = true;
+                dataNaoUsada = false;
+            }
+        }
+        if(dataNaoUsada){
+            DiaTrabalho e = new DiaTrabalho(this.tempo);
+            e.data = data;
+            e.horarios[indexHora][indexMin] = true;
+            this.agenda.add(e);
+        }
+        System.out.println(indexHora);
+        System.out.println(this.horario);
     }
     
     @Override

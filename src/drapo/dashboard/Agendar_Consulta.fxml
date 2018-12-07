@@ -67,10 +67,10 @@
                </font>
             </Label>
             <TextField fx:id="tf_cliente" layoutX="63.0" layoutY="137.0" prefHeight="25.0" prefWidth="167.0" />
-            <ComboBox fx:id="cb_especialidade" layoutX="63.0" layoutY="211.0" prefHeight="25.0" prefWidth="167.0" />
+            <ComboBox fx:id="cb_especialidade" layoutX="63.0" layoutY="211.0" onAction="#filtraMedicos" prefHeight="25.0" prefWidth="167.0" />
             <TextField fx:id="tf_telefone" layoutX="287.0" layoutY="137.0" prefHeight="25.0" prefWidth="167.0" />
-            <ComboBox fx:id="cb_medico" layoutX="287.0" layoutY="211.0" prefHeight="25.0" prefWidth="167.0" />
-            <TextField fx:id="tf_data" layoutX="528.0" layoutY="137.0" prefHeight="25.0" prefWidth="166.0" />
+            <ComboBox fx:id="cb_medico" layoutX="287.0" layoutY="211.0" onAction="#filtraHora" prefHeight="25.0" prefWidth="167.0" />
+            <TextField fx:id="tf_data" layoutX="528.0" layoutY="137.0" onKeyTyped="#checa_dataFim" prefHeight="25.0" prefWidth="166.0" />
             <RadioButton fx:id="rb_convenio" layoutX="463.0" layoutY="281.0" mnemonicParsing="false" onAction="#convenio_clique" text="Convênio">
                <font>
                   <Font size="13.0" />
@@ -118,7 +118,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <ComboBox fx:id="cb_hora" layoutX="529.0" layoutY="211.0" prefHeight="25.0" prefWidth="78.0" />
+            <ComboBox fx:id="cb_hora" layoutX="529.0" layoutY="211.0" onAction="#filtraMin" prefHeight="25.0" prefWidth="78.0" />
             <ComboBox fx:id="cb_min" layoutX="617.0" layoutY="211.0" prefHeight="25.0" prefWidth="78.0" />
             <TextField fx:id="tf_valor" layoutX="528.0" layoutY="345.0" prefHeight="25.0" prefWidth="166.0" />
          </children>

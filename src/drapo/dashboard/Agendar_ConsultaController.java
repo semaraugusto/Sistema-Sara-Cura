@@ -10,9 +10,11 @@ import java.util.*;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyEvent;
 import javax.swing.JOptionPane;
 
 /**
@@ -21,7 +23,16 @@ import javax.swing.JOptionPane;
  * @author Henrique
  */
 public class Agendar_ConsultaController implements Initializable {
-
+    
+    boolean dataNaoUsada;
+    
+    String arrMin15[] = {"00", "15", "30", "45"};
+    String arrMin20[] = {"00", "20", "40"};
+    String arrMin30[] = {"00", "30"};
+    String arrHora[] = {"07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19"};
+    List<String> horasDisponiveis = new ArrayList<>();
+    List<String> minsDisponiveis = new ArrayList<>();
+    
     @FXML private RadioButton rb_particular;
     @FXML private RadioButton rb_convenio;
     @FXML private RadioButton rb_cartao;
@@ -78,7 +89,32 @@ public class Agendar_ConsultaController implements Initializable {
     }
     
     private void limpaCampos(){
+        dataNaoUsada = true;
+        cb_especialidade.setDisable(true);
+        cb_medico.setDisable(true);
+        cb_hora.setDisable(true);
+        cb_min.setDisable(true);
         
+        List<String> especialidades = new ArrayList<>();
+        cb_medico.getItems().clear();
+        cb_especialidade.getItems().clear();
+        cb_hora.getItems().clear();
+        cb_min.getItems().clear();
+        
+        tf_cliente.setText("");
+        tf_telefone.setText("");
+        tf_data.setText("");
+        tf_valor.setText("");
+        
+        for(Medico it : HomeController.medicos){
+            for(String itt : it.especialidades)
+                if(!especialidades.contains(itt))
+                    especialidades.add(itt);
+        }
+        cb_especialidade.setItems(FXCollections.observableArrayList(especialidades));
+        
+        rb_particular.setSelected(true);
+        particular_clique();
     }
     
     private void verificar_particular() throws Exception{
@@ -180,11 +216,10 @@ public class Agendar_ConsultaController implements Initializable {
             int mes = Integer.parseInt(data.substring(3,5));
             int ano = Integer.parseInt(data.substring(6));
             int diaSemana = congruenciaZeller(dia, mes, ano);
-            System.out.println(diaSemana);
-            if(dias[diaSemana]){
+            if(dias[(diaSemana-2)%7]){
                 return true;
             }else{
-                JOptionPane.showMessageDialog(null, "A data inserida é " + nomeDias[diaSemana] + " e o médico selecionado...", "Dados inconsistentes", JOptionPane.ERROR_MESSAGE);
+                //JOptionPane.showMessageDialog(null, "A data inserida é " + nomeDias[diaSemana] + " e o médico selecionado...", "Dados inconsistentes", JOptionPane.ERROR_MESSAGE);
                 return false;
             }
         }else{
@@ -194,11 +229,42 @@ public class Agendar_ConsultaController implements Initializable {
     }
     
     @FXML
+    private void checa_dataFim(KeyEvent e){
+        String data = tf_data.getText();
+        if(data.length() == 9){
+            if(!formatoDataOK(data + e.getCharacter())){
+                JOptionPane.showMessageDialog(null, "O formato de data usado está incorreto (usar dd/mm/aaaa).", "Dados inconsistentes", JOptionPane.ERROR_MESSAGE);
+                tf_data.setText("");
+                cb_especialidade.setDisable(true);
+                e.consume();
+            }else{
+                cb_especialidade.setDisable(false);
+            }
+        }else if(data.length()>=10)
+            e.consume();
+    }
+    
+    @FXML
     private void agendar_clique(){
         if(entradaOK()){
             if(rb_particular.isSelected()){
                 try{
                     verificar_particular();
+                    Medico med = null;
+                    
+                    for(Medico it : HomeController.medicos)
+                        if(Objects.equals(it.nome, cb_medico.getValue()))
+                            med = it;
+                    
+                    if(med != null){
+                        if(dataOK(tf_data.getText(), med.dias)){
+                            med.marcaConsulta(tf_data.getText(), (String)cb_hora.getValue(), (String)cb_min.getValue());
+                            JOptionPane.showMessageDialog(null, "Consulta agendada com sucesso!", "Sucesso", JOptionPane.PLAIN_MESSAGE);
+                            limpaCampos();
+                        }
+                    }else{
+                        JOptionPane.showMessageDialog(null, "Médico não cadastrado.", "Dados inconsistentes", JOptionPane.ERROR_MESSAGE);
+                    } 
                 }catch(Exception e){
                     JOptionPane.showMessageDialog(null, "Pagamento recusado.", "Pagamento inconsistente", JOptionPane.ERROR_MESSAGE);
                     limpaCampos();
@@ -213,8 +279,11 @@ public class Agendar_ConsultaController implements Initializable {
                             med = it;
                     
                     if(med != null){
-                        if(dataOK(tf_data.getText(), med.dias))
-                            med.marcaConsulta();
+                        if(dataOK(tf_data.getText(), med.dias)){
+                            med.marcaConsulta(tf_data.getText(), (String)cb_hora.getValue(), (String)cb_min.getValue());
+                            JOptionPane.showMessageDialog(null, "Consulta agendada com sucesso!", "Sucesso", JOptionPane.PLAIN_MESSAGE);
+                            limpaCampos();
+                        }
                     }else{
                         JOptionPane.showMessageDialog(null, "Médico não cadastrado.", "Dados inconsistentes", JOptionPane.ERROR_MESSAGE);
                     }                    
@@ -226,19 +295,122 @@ public class Agendar_ConsultaController implements Initializable {
         }
     }
     
+    @FXML private void filtraMedicos(){
+        cb_medico.getItems().clear();
+        
+        List<String> medicos = new ArrayList<>();
+        for(Medico it : HomeController.medicos){
+            for(String itt : it.especialidades)
+                if(Objects.equals(itt, cb_especialidade.getValue()) && dataOK(tf_data.getText(), it.dias))
+                    medicos.add(it.nome);
+        }
+        cb_medico.setItems(FXCollections.observableArrayList(medicos));
+        
+        cb_medico.setDisable(false);
+    }
+    
+    @FXML private void filtraHora(){
+        horasDisponiveis.clear();
+        minsDisponiveis.clear();
+        Medico med = null;
+
+        for(Medico it : HomeController.medicos)
+            if(Objects.equals(it.nome, cb_medico.getValue()))
+                med = it;
+
+        if(med != null){
+            if(dataOK(tf_data.getText(), med.dias)){
+                int i;
+                for(i=med.horario;i<med.horario+6;i++)
+                    horasDisponiveis.add(arrHora[i]);
+                cb_hora.setItems(FXCollections.observableArrayList(horasDisponiveis));
+                cb_hora.setDisable(false);
+            }else{
+                filtraMedicos();
+            }
+        }
+    }
+    
+    @FXML private void filtraMin(){
+        minsDisponiveis.clear();
+        Medico med = null;
+        int horaAtual, intervaloAtual;
+
+        for(Medico it : HomeController.medicos)
+            if(Objects.equals(it.nome, cb_medico.getValue()))
+                med = it;
+
+        if(med != null){
+            if(dataOK(tf_data.getText(), med.dias)){
+                for(DiaTrabalho dia : med.agenda){
+                    if(Objects.equals(dia.data, tf_data.getText())){
+                        horaAtual = 0;
+                        for(boolean hora[] : dia.horarios){
+                            if(Objects.equals(cb_hora.getValue(), arrHora[med.horario+horaAtual])){
+                                intervaloAtual = 0;
+                                for(boolean marcada : hora){
+                                    if(!marcada){
+                                        if(med.tempo == 15)
+                                            minsDisponiveis.add(arrMin15[intervaloAtual]);
+                                        else if(med.tempo == 20)
+                                            minsDisponiveis.add(arrMin20[intervaloAtual]);
+                                        else
+                                            minsDisponiveis.add(arrMin30[intervaloAtual]);
+                                    }
+                                    intervaloAtual++;
+                                }
+                            }
+                            horaAtual++;
+                        }
+                        dataNaoUsada = false;
+                    }
+                }
+                if(dataNaoUsada){
+                    if(med.tempo == 15)
+                        cb_min.setItems(FXCollections.observableArrayList(arrMin15));
+                    else if(med.tempo == 20)
+                        cb_min.setItems(FXCollections.observableArrayList(arrMin20));
+                    else
+                        cb_min.setItems(FXCollections.observableArrayList(arrMin30));
+                }else{
+                    cb_min.setItems(FXCollections.observableArrayList(minsDisponiveis));
+                }
+                cb_min.setDisable(false);
+            }else{
+                filtraMedicos();
+            }
+        }
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        List<String> medicos = new ArrayList<>();
+        dataNaoUsada = true;
+        cb_especialidade.setDisable(true);
+        cb_medico.setDisable(true);
+        cb_hora.setDisable(true);
+        cb_min.setDisable(true);
+        
         List<String> especialidades = new ArrayList<>();
+        cb_medico.getItems().clear();
+        cb_especialidade.getItems().clear();
+        cb_hora.getItems().clear();
+        cb_min.getItems().clear();
+        
+        tf_cliente.setText("");
+        tf_telefone.setText("");
+        tf_data.setText("");
+        tf_valor.setText("");
         
         for(Medico it : HomeController.medicos){
-            medicos.add(it.nome);
             for(String itt : it.especialidades)
-                especialidades.add(itt);
+                if(!especialidades.contains(itt))
+                    especialidades.add(itt);
         }
-        cb_medico.setItems(FXCollections.observableArrayList(medicos));
         cb_especialidade.setItems(FXCollections.observableArrayList(especialidades));
+        
+        rb_particular.setSelected(true);
+        particular_clique();
     }    
     
 }
