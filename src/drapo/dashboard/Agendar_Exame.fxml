@@ -24,7 +24,7 @@
                </image>
             </ImageView>
             <Separator layoutX="41.0" layoutY="94.0" prefHeight="0.0" prefWidth="763.0" />
-            <Label layoutX="123.0" layoutY="19.0" text="Agendamento de uma nova consulta" textFill="#3a1c9d">
+            <Label layoutX="123.0" layoutY="19.0" text="Agendamento de um novo exame" textFill="#3a1c9d">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -62,7 +62,7 @@
                      </font></Button>
                </children>
             </Pane>
-            <Label layoutX="123.0" layoutY="48.0" text="Adicione uma nova consulta ao sistema" textFill="#b2b0b0">
+            <Label layoutX="123.0" layoutY="48.0" text="Adicione um novo exame ao sistema" textFill="#b2b0b0">
                <font>
                   <Font size="14.0" />
                </font>
