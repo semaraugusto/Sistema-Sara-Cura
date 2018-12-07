@@ -21,6 +21,10 @@ public class Medico {
     List<String> especialidades;
     List<DiaTrabalho> agenda;
     
+    Medico(){
+       this.especialidades = new ArrayList<String>(); 
+    }
+    
     Medico(int tempo, int horario, boolean dias[], String nome, List<String> especialidades){
         this.tempo = tempo;
         this.horario = horario;

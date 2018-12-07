@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package drapo.dashboard;
+import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -21,6 +22,10 @@ import javafx.scene.Node;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 /**
  *
  * @author oXCToo
@@ -68,10 +73,58 @@ public class HomeController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        JSONParser parser = new JSONParser();
         dadosMedicos = new JSON("medicos.json");
         medicos = new ArrayList<>();
-//        dadosMedicos.read = new JSONObject();
-        // TODO
+        
+        
+            try {
+                
+                JSONArray geral = (JSONArray) parser.parse(new FileReader("medicos.json"));
+                for(Object o : geral)
+                {   
+                    Medico provisorio = new Medico();
+                    JSONObject medico = (JSONObject) o;
+                    
+                    provisorio.nome = (String) medico.get("nome");
+                    provisorio.horario = (int)(long) medico.get("horario");
+                    provisorio.tempo = (int)(long) medico.get("tempo");
+                    JSONArray dias = (JSONArray) medico.get("dias");
+                    int i = 0;
+                    for(Object d : dias){
+                        provisorio.dias[i] = Boolean.valueOf(d.toString());
+                        i++;
+                    }
+                    
+                    JSONArray especialidades = (JSONArray) medico.get("especialidades");
+                    
+                    for(Object e : especialidades){
+                        provisorio.especialidades.add((String)e);
+                    }
+                    
+                    medicos.add(provisorio);
+                    
+                    JSONArray agenda = (JSONArray)medico.get("agenda");
+                     for(Object a : agenda){
+                         JSONObject teste = (JSONObject) a;
+                         System.out.println(teste.get("data"));
+                         JSONArray horarios = (JSONArray) teste.get("horarios");
+                         
+                         for(Object h : horarios){
+                             System.out.println(h);
+                         }
+                         
+                     }
+
+                    System.out.println(provisorio.toString());
+                }
+           
+            } catch (IOException ex) {
+                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ParseException ex) {
+                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+      
     }
     
     private void atualizar_consultas()
