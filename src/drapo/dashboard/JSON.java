@@ -26,6 +26,7 @@ public class JSON {
     public FileWriter arquivo;
     JSONObject read;
     JSONObject write;
+    JSONArray saida = new JSONArray();
     public JSON(String nomeArq) {
         File f = new File(nomeArq);
         if(f.exists()){
@@ -45,27 +46,48 @@ public class JSON {
         }
     }
     
-    public void escreveMedico(Medico med){
+    public void salvaMedico(Medico med){
         this.write = new JSONObject();
+
+        JSONArray listEspecialidades = new JSONArray();
+        for(String especialidade : med.especialidades)
+            listEspecialidades.add(especialidade);
+        this.write.put("especialidades", listEspecialidades);
+
+        this.write.put("tempo", med.tempo);
+
+        this.write.put("horario", med.horario);
+
+        JSONArray listDias = new JSONArray();
+        for(boolean dia : med.dias)
+            listDias.add(dia);
+        this.write.put("dias", listDias);
         
-        try {
-            this.write.put("nome", med.nome);
-            
-            JSONArray listEspecialidades = new JSONArray();
-            for(String especialidade : med.especialidades)
-                listEspecialidades.add(especialidade);
-            this.write.put("especialidades", listEspecialidades);
-            
-            this.write.put("tempo", med.tempo);
-            
-            this.write.put("horario", med.horario);
-            
-            JSONArray listDias = new JSONArray();
-            for(boolean dia : med.dias)
-                listDias.add(dia);
-            this.write.put("dias", listDias);
-            
-            this.arquivo.write(write.toString());
+        this.write.put("nome", med.nome);
+        
+        JSONArray agenda = new JSONArray();
+        for(DiaTrabalho dia : med.agenda){
+            JSONObject diaObj = new JSONObject();
+            diaObj.put("data", dia.data);
+            JSONArray hora = new JSONArray();
+            for(boolean horaArr[] : dia.horarios){
+                JSONArray mins = new JSONArray();
+                for(boolean intervalo : horaArr){
+                    mins.add(intervalo);
+                }
+                hora.add(mins);
+            }
+            diaObj.put("horarios", hora);
+            agenda.add(diaObj);
+        }
+        this.write.put("agenda", agenda);
+        
+        this.saida.add(this.write);
+    }
+    
+    public void escreveMedicos(){
+        try{
+            this.arquivo.write(this.saida.toString());
             this.arquivo.flush();
         } catch (IOException ex) {
             Logger.getLogger(JSON.class.getName()).log(Level.SEVERE, null, ex);

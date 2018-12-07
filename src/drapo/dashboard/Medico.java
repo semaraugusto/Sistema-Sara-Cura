@@ -61,7 +61,7 @@ public class Medico {
             }
         }
         
-        horaAtual = this.horario;
+        horaAtual = 0;
         for(String ihora : arrHora){
             if(Objects.equals(ihora, hora))
                 indexHora = horaAtual - this.horario;

@@ -70,8 +70,9 @@ public class HomeController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         dadosMedicos = new JSON("medicos.json");
         medicos = new ArrayList<>();
+//        dadosMedicos.read = new JSONObject();
         // TODO
-    }    
+    }
     
     private void atualizar_consultas()
     {
