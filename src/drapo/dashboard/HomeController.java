@@ -23,6 +23,10 @@ import javafx.scene.Node;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 /**
  *
  * @author oXCToo
@@ -32,6 +36,7 @@ public class HomeController implements Initializable {
     public static List<Medico> medicos;
     public static List<Equipamento> equipamentos;
     public static List<Consulta> consultas;
+    public static JSON dadosMedicos;
     
     ObservableList<String> choicebox_hora_lista = FXCollections.observableArrayList("01", "02", "03");
     
@@ -74,6 +79,61 @@ public class HomeController implements Initializable {
         medicos = new ArrayList<>();
         equipamentos = new ArrayList<>();
         consultas = new ArrayList<>();
+        JSONParser parser = new JSONParser();
+        
+        dadosMedicos = new JSON("medicos.json");
+        
+        
+            try {
+                
+                JSONArray geral = (JSONArray) parser.parse(new FileReader("medicos.json"));
+                for(Object o : geral)
+                {   
+                    Medico provisorio = new Medico();
+                    JSONObject medico = (JSONObject) o;
+                    
+                    provisorio.nome = (String) medico.get("nome");
+                    provisorio.horario = (int)(long) medico.get("horario");
+                    provisorio.tempo = (int)(long) medico.get("tempo");
+                    JSONArray dias = (JSONArray) medico.get("dias");
+                    int i = 0;
+                    for(Object d : dias){
+                        provisorio.dias[i] = Boolean.valueOf(d.toString());
+                        i++;
+                    }
+                    
+                    JSONArray especialidades = (JSONArray) medico.get("especialidades");
+                    
+                    for(Object e : especialidades){
+                        provisorio.especialidades.add((String)e);
+                    }
+                    
+                    medicos.add(provisorio);
+                    
+                    JSONArray agenda = (JSONArray)medico.get("agenda");
+                    i = 0;
+                    for(Object a : agenda){
+                         DiaTrabalho dt = new DiaTrabalho(provisorio.tempo);
+                         JSONObject teste = (JSONObject) a;
+                         JSONArray horarios = (JSONArray) teste.get("horarios");
+                         for(int j = 0; j<6; j++){
+                             JSONArray h = (JSONArray) horarios.get(j);
+                             for(int k = 0; k < (60/provisorio.tempo); k++){
+                                 dt.horarios[j][k] = Boolean.valueOf(h.get(k).toString());
+                             }
+                         }
+                         dt.data = (String) teste.get("data");
+                         provisorio.agenda.add(dt);              
+                    }
+                    
+
+                    medicos.add(provisorio);
+                }
+           
+            } catch (IOException | ParseException ex) {
+                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+      
     }
     
     private void atualizar_consultas()

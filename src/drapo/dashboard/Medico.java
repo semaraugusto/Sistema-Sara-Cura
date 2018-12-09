@@ -15,14 +15,16 @@ import java.util.Objects;
  * @author Henrique
  */
 public class Medico {    
-    boolean dias[];
+    boolean dias[] = {false,false,false,false,false,false,false};
     int tempo, horario;
     String nome;
     List<String> especialidades;
     List<DiaTrabalho> agenda;
     
     Medico(){
-       this.especialidades = new ArrayList<String>(); 
+       this.especialidades = new ArrayList<>(); 
+       this.agenda = new ArrayList<>();
+
     }
     
     Medico(int tempo, int horario, boolean dias[], String nome, List<String> especialidades){
