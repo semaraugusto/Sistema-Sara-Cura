@@ -22,7 +22,7 @@ public class JSON {
         File f = new File(nomeArq);
         if(f.exists()){
             try {
-                arquivo = new FileWriter(f,true);
+                arquivo = new FileWriter(f,false);
             } catch (IOException ex) {
                 Logger.getLogger(JSON.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -75,14 +75,6 @@ public class JSON {
         this.saida.add(this.write);
     }
     
-    public void escreveMedicos(){
-        try{
-            this.arquivo.write(this.saida.toString());
-            this.arquivo.flush();
-        } catch (IOException ex) {
-            Logger.getLogger(JSON.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
     
     public void salvaConsulta(Consulta consulta){
         this.write = new JSONObject();
@@ -97,14 +89,6 @@ public class JSON {
         this.saida.add(this.write);
     }
 
-    public void escreveConsulta(){
-        try{
-            this.arquivo.write(this.saida.toString());
-            this.arquivo.flush();
-        } catch (IOException ex) {
-            Logger.getLogger(JSON.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
     
     public void salvaExame(Exame exame){
         this.write = new JSONObject();
@@ -122,7 +106,21 @@ public class JSON {
 
     }
 
-    public void escreveExame(){
+
+    
+     public void salvaEquipamento(Equipamento equip){
+        this.write = new JSONObject();
+        this.write.put("data", equip.equipamento);
+        this.write.put("equipamento", equip.especialidade);
+        this.write.put("especificacoes", equip.horario_de_funcionamento);
+        this.write.put("forma_de_atendimento", equip.status);
+        this.write.put("horario", equip.tempo);
+        
+        this.saida.add(this.write);
+
+    }
+     
+    public void escreve(){
         try{
             this.arquivo.write(this.saida.toString());
             this.arquivo.flush();

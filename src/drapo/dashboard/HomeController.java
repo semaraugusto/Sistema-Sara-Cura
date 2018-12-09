@@ -31,7 +31,7 @@ import org.json.simple.parser.ParseException;
  * @author oXCToo
  */
 public class HomeController implements Initializable {    
-    
+    public static int counter;
     public static List<Medico> medicos;
     public static List<Equipamento> equipamentos;
     public static List<Consulta> consultas;
@@ -39,6 +39,7 @@ public class HomeController implements Initializable {
     public static JSON dadosMedicos;
     public static JSON dadosConsultas;
     public static JSON dadosExames;
+    public static JSON dadosEquipamentos;
     
     ObservableList<String> choicebox_hora_lista = FXCollections.observableArrayList("01", "02", "03");
     
@@ -85,6 +86,19 @@ public class HomeController implements Initializable {
         JSONParser parser = new JSONParser();
         
             try {
+                JSONArray eqp = (JSONArray) parser.parse(new FileReader("exames.json"));
+                for(Object o : eqp){
+                    JSONObject equipamento = (JSONObject) o;
+                    Equipamento equipTemp = new Equipamento();
+                    equipTemp.equipamento = (String) equipamento.get("equipamento");
+                    equipTemp.especialidade = (String) equipamento.get("especialidade");
+                    equipTemp.horario_de_funcionamento = (String) equipamento.get("horario_de_funcionamento");
+                    equipTemp.status = (String) equipamento.get("status");
+                    equipTemp.tempo = (String) equipamento.get("tempo");
+                    equipamentos.add(equipTemp);
+                }
+
+                
                 JSONArray ex = (JSONArray) parser.parse(new FileReader("exames.json"));
                 for(Object o : ex){
                     JSONObject exame = (JSONObject) o;
@@ -117,6 +131,7 @@ public class HomeController implements Initializable {
                     provisoria.telefone = (String) consulta.get("telefone");
                     consultas.add(provisoria);
                     i++;
+                    counter = i;
                 }
                 
                 JSONArray geral = (JSONArray) parser.parse(new FileReader("medicos.json"));
@@ -167,6 +182,7 @@ public class HomeController implements Initializable {
             dadosMedicos = new JSON("medicos.json");
             dadosConsultas = new JSON("consultas.json");
             dadosExames = new JSON("exames.json");
+            dadosExames = new JSON("equipamentos.json");
     }
     
     private void atualizar_consultas()

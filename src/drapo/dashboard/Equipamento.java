@@ -11,7 +11,7 @@ public class Equipamento {
     String status;
 
     
-    
+    Equipamento(){};
     Equipamento(String equipamento, String especialidade, String tempo, String horario_de_funcionamento, String status){
         this.equipamento = equipamento;
         this.especialidade = especialidade;

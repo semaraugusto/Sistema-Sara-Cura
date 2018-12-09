@@ -17,8 +17,8 @@ public class Consulta {
     Consulta(){}
     
     Consulta(String paciente, String telefone, String medico, String valor, String forma_de_atendimento, String data, String horario){
-        Consulta.id++;
-        this.ref = "Ref: " + String.valueOf(Consulta.id);
+        this.ref = "Ref: " + String.valueOf(HomeController.counter);
+        HomeController.counter++;
         this.paciente = paciente;
         this.telefone = telefone;
         this.medico = medico;

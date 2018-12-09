@@ -81,7 +81,7 @@
                </children>
             </Pane>
             <Separator layoutX="698.0" layoutY="37.0" orientation="VERTICAL" prefHeight="46.0" prefWidth="6.0" />
-            <Label fx:id="entradaHorario" layoutX="710.0" layoutY="40.0" text="09:00" textFill="#aeacac">
+            <Label fx:id="entradaHorario" layoutX="710.0" layoutY="43.0" text="09:00" textFill="#aeacac">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
@@ -107,7 +107,7 @@
                   <Font size="13.0" />
                </font>
             </Label>
-            <Label fx:id="entradaData" layoutX="557.0" layoutY="40.0" text="12/06/2018" textFill="#aeacac">
+            <Label fx:id="entradaData" layoutX="557.0" layoutY="43.0" text="12/06/2018" textFill="#aeacac">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>

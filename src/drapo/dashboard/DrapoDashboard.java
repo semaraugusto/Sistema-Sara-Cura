@@ -20,15 +20,19 @@ public class DrapoDashboard extends Application {
             public void handle(WindowEvent event1) {
                 for(Medico med : HomeController.medicos)
                     HomeController.dadosMedicos.salvaMedico(med);
-                HomeController.dadosMedicos.escreveMedicos();
+                HomeController.dadosMedicos.escreve();
                 for(Consulta c : HomeController.consultas){
                     HomeController.dadosConsultas.salvaConsulta(c);
                 }
-                HomeController.dadosConsultas.escreveConsulta();
+                HomeController.dadosConsultas.escreve();
                 for(Exame e : HomeController.exames){
                     HomeController.dadosExames.salvaExame(e);
                 }
-                HomeController.dadosExames.escreveExame();
+                HomeController.dadosExames.escreve();
+                for(Equipamento eqp : HomeController.equipamentos){
+                    HomeController.dadosEquipamentos.salvaEquipamento(eqp);
+                }
+                HomeController.dadosEquipamentos.escreve();
             }
         });
         stage.show();
