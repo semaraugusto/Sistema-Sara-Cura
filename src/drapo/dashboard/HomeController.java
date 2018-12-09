@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -37,6 +36,7 @@ public class HomeController implements Initializable {
     public static List<Equipamento> equipamentos;
     public static List<Consulta> consultas;
     public static JSON dadosMedicos;
+    public static JSON dadosConsultas;
     
     ObservableList<String> choicebox_hora_lista = FXCollections.observableArrayList("01", "02", "03");
     
@@ -81,10 +81,20 @@ public class HomeController implements Initializable {
         consultas = new ArrayList<>();
         JSONParser parser = new JSONParser();
         
-        dadosMedicos = new JSON("medicos.json");
-        
-        
             try {
+                JSONArray cons = (JSONArray) parser.parse(new FileReader("consultas.json"));
+                for(Object o : cons){
+                    JSONObject consulta = (JSONObject) o;
+                    Consulta provisoria = new Consulta();
+                    provisoria.data = (String) consulta.get("data");
+                    provisoria.ref = (String) consulta.get("ref");
+                    provisoria.forma_de_atendimento = (String) consulta.get("forma_de_atendimento");
+                    provisoria.paciente = (String) consulta.get("paciente");
+                    provisoria.horario = (String) consulta.get("horario");
+                    provisoria.valor = (String) consulta.get("valor");
+                    provisoria.telefone = (String) consulta.get("telefone");
+                    consultas.add(provisoria);
+                }
                 
                 JSONArray geral = (JSONArray) parser.parse(new FileReader("medicos.json"));
                 for(Object o : geral)
@@ -108,8 +118,6 @@ public class HomeController implements Initializable {
                         provisorio.especialidades.add((String)e);
                     }
                     
-                    medicos.add(provisorio);
-                    
                     JSONArray agenda = (JSONArray)medico.get("agenda");
                     i = 0;
                     for(Object a : agenda){
@@ -125,15 +133,18 @@ public class HomeController implements Initializable {
                          dt.data = (String) teste.get("data");
                          provisorio.agenda.add(dt);              
                     }
-                    
-
+                   
                     medicos.add(provisorio);
                 }
-           
+            
             } catch (IOException | ParseException ex) {
                 Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
             }
-      
+            
+            dadosMedicos = new JSON("medicos.json");
+            dadosConsultas = new JSON("consultas.json");
+
+            
     }
     
     private void atualizar_consultas()

@@ -31,11 +31,10 @@ public class JSON {
         File f = new File(nomeArq);
         if(f.exists()){
             try {
-                arquivo = new FileWriter(f,true);
+                arquivo = new FileWriter(f,false);
             } catch (IOException ex) {
                 Logger.getLogger(JSON.class.getName()).log(Level.SEVERE, null, ex);
             }
-            System.out.println("seilaoq");
         }
         else{
             try {
@@ -43,6 +42,28 @@ public class JSON {
             } catch (IOException ex) {
                 Logger.getLogger(JSON.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }
+    }
+    
+    public void salvaConsulta(Consulta consulta){
+        this.write = new JSONObject();
+        this.write.put("ref", consulta.ref);
+        this.write.put("data", consulta.data);
+        this.write.put("forma_de_atendimento", consulta.forma_de_atendimento);
+        this.write.put("horario", consulta.horario);
+        this.write.put("medico", consulta.medico);
+        this.write.put("paciente", consulta.paciente);
+        this.write.put("telefone", consulta.telefone);
+        this.write.put("valor", consulta.valor);
+        this.saida.add(this.write);
+    }
+    
+    public void escreveConsulta(){
+        try{
+            this.arquivo.write(this.saida.toString());
+            this.arquivo.flush();
+        } catch (IOException ex) {
+            Logger.getLogger(JSON.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
