@@ -30,6 +30,7 @@ import javafx.scene.layout.VBox;
 public class HomeController implements Initializable {    
     
     public static List<Medico> medicos;
+    public static List<Equipamento> equipamentos;
     public static List<Consulta> consultas;
     
     ObservableList<String> choicebox_hora_lista = FXCollections.observableArrayList("01", "02", "03");
@@ -71,6 +72,7 @@ public class HomeController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         medicos = new ArrayList<>();
+        equipamentos = new ArrayList<>();
         consultas = new ArrayList<>();
     }
     

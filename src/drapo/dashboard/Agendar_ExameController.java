@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
@@ -158,6 +159,11 @@ public class Agendar_ExameController implements Initializable {
             return false;
         }
         
+        if(Objects.equals(ta_especificacoes.getText(), "")){
+            JOptionPane.showMessageDialog(null, "As especificações não foram dadas.", "Dados inconsistentes", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        
         if(!rb_particular.isSelected() && !rb_convenio.isSelected()){
             JOptionPane.showMessageDialog(null, "O método de pagamento não foi selecionado.", "Dados inconsistentes", JOptionPane.ERROR_MESSAGE);
             return false;
@@ -238,21 +244,15 @@ public class Agendar_ExameController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         dataNaoUsada = true;
         cb_medico.setDisable(true);
-        cb_equipamento.setDisable(true);
         cb_hora.setDisable(true);
         cb_min.setDisable(true);
         
-        cb_medico.getItems().clear();
-        cb_equipamento.getItems().clear();
-        cb_hora.getItems().clear();
-        cb_min.getItems().clear();
-        
-        tf_cliente.setText("");
-        tf_telefone.setText("");
-        tf_data.setText("");
-        tf_valor.setText("");
-        
-        ta_especificacoes.setText("");
+        List<String> equipamentos = new ArrayList<>();
+        for(Equipamento it : HomeController.equipamentos){
+            if(!equipamentos.contains(it.equipamento))
+                    equipamentos.add(it.equipamento);
+        }
+        cb_equipamento.setItems(FXCollections.observableArrayList(equipamentos));
         
         rb_particular.setSelected(true);
         forma_de_atendimento = "Particular";
