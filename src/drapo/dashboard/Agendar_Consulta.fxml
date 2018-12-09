@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="509.0" prefWidth="949.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="drapo.dashboard.Agendar_ConsultaController">
+   <children>
+      <Pane layoutX="39.0" layoutY="24.0" prefHeight="461.0" prefWidth="896.0" style="-fx-background-color: #ffffff;">
+         <children>
+            <ImageView fitHeight="70.0" fitWidth="76.0" layoutX="41.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/icons8_500px_64px.png" />
+               </image>
+            </ImageView>
+            <Separator layoutX="41.0" layoutY="94.0" prefHeight="0.0" prefWidth="763.0" />
+            <Label layoutX="123.0" layoutY="19.0" text="Agendamento de uma nova consulta" textFill="#3a1c9d">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="51.0" layoutY="113.0" text="PACIENTE" textFill="#aeacac">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="51.0" layoutY="186.0" text="ESPECIALIDADE" textFill="#aeacac">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="279.0" layoutY="113.0" text="TELEFONE" textFill="#aeacac">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="279.0" layoutY="186.0" text="MÉDICO" textFill="#aeacac">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="520.0" layoutY="113.0" text="DATA" textFill="#aeacac">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Pane layoutY="391.0" prefHeight="70.0" prefWidth="896.0" style="-fx-background-color: #F0F0F0;">
+               <children>
+                  <Button layoutX="35.0" layoutY="21.0" mnemonicParsing="false" onAction="#agendar_clique" text="Agendar" textFill="#504df2">
+                     <font>
+                        <Font size="13.0" />
+                     </font></Button>
+               </children>
+            </Pane>
+            <Label layoutX="123.0" layoutY="48.0" text="Adicione uma nova consulta ao sistema" textFill="#b2b0b0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="tf_cliente" layoutX="63.0" layoutY="137.0" prefHeight="25.0" prefWidth="167.0" />
+            <ComboBox fx:id="cb_especialidade" layoutX="63.0" layoutY="211.0" onAction="#filtraMedicos" prefHeight="25.0" prefWidth="167.0" />
+            <TextField fx:id="tf_telefone" layoutX="287.0" layoutY="137.0" prefHeight="25.0" prefWidth="167.0" />
+            <ComboBox fx:id="cb_medico" layoutX="287.0" layoutY="211.0" onAction="#filtraHora" prefHeight="25.0" prefWidth="167.0" />
+            <TextField fx:id="tf_data" layoutX="528.0" layoutY="137.0" onKeyTyped="#checa_dataFim" prefHeight="25.0" prefWidth="166.0" />
+            <RadioButton fx:id="rb_convenio" layoutX="463.0" layoutY="281.0" mnemonicParsing="false" onAction="#convenio_clique" text="Convênio">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </RadioButton>
+            <RadioButton fx:id="rb_particular" layoutX="342.0" layoutY="281.0" mnemonicParsing="false" onAction="#particular_clique" text="Particular">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </RadioButton>
+            <Label fx:id="label_convenio" layoutX="51.0" layoutY="321.0" text="NOME DO CONVÊNIO" textFill="#aeacac" visible="false">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <RadioButton fx:id="rb_cheque" layoutX="60.0" layoutY="347.0" mnemonicParsing="false" onAction="#cheque_clique" text="Cheque" visible="false">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </RadioButton>
+            <RadioButton fx:id="rb_cartao" layoutX="137.0" layoutY="347.0" mnemonicParsing="false" onAction="#cartao_clique" text="Cartão de crédito/débito" visible="false">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </RadioButton>
+            <RadioButton fx:id="rb_dinheiro" layoutX="312.0" layoutY="347.0" mnemonicParsing="false" onAction="#dinheiro_clique" text="Dinheiro" visible="false">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </RadioButton>
+            <Label layoutX="520.0" layoutY="320.0" text="VALOR" textFill="#aeacac">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="tf_convenio" layoutX="54.0" layoutY="345.0" prefHeight="25.0" prefWidth="167.0" visible="false" />
+            <TextField fx:id="tf_matricula" layoutX="283.0" layoutY="344.0" prefHeight="25.0" prefWidth="167.0" visible="false" />
+            <Label fx:id="label_matricula" layoutX="277.0" layoutY="321.0" text="MATRÍCULA" textFill="#aeacac" visible="false">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="520.0" layoutY="186.0" text="HORÁRIO" textFill="#aeacac">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="cb_hora" layoutX="529.0" layoutY="211.0" onAction="#filtraMin" prefHeight="25.0" prefWidth="78.0" />
+            <ComboBox fx:id="cb_min" layoutX="617.0" layoutY="211.0" prefHeight="25.0" prefWidth="78.0" />
+            <TextField fx:id="tf_valor" layoutX="528.0" layoutY="345.0" prefHeight="25.0" prefWidth="166.0" />
+         </children>
+         <effect>
+            <DropShadow color="#d7d2d2" height="50.0" radius="24.5" width="50.0" />
+         </effect>
+      </Pane>
+   </children>
+</AnchorPane>
