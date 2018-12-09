@@ -6,7 +6,6 @@
 package drapo.dashboard;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -86,8 +85,6 @@ public class Medico {
             e.horarios[indexHora][indexMin] = true;
             this.agenda.add(e);
         }
-        System.out.println(indexHora);
-        System.out.println(this.horario);
     }
     
     @Override

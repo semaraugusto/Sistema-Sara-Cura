@@ -16,6 +16,7 @@ public class Exame {
     String valor;
     String forma_de_atendimento;
     
+    Exame(){}
     
     Exame(String paciente, String telefone, String data, String equipamento, String medico, String horario, String especificacoes, String valor, String forma_de_atendimento){
         Exame.id++;

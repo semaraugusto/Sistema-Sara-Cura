@@ -5,17 +5,11 @@
  */
 package drapo.dashboard;
 import java.util.*;
-import java.io.IOException;
 import java.net.URL;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 /**
  *
@@ -23,21 +17,27 @@ import javafx.scene.text.Text;
  */
 public class ExameController implements Initializable {    
     
+    @FXML private Label entradaReferencia;
     @FXML private Label entradaCliente;
     @FXML private Label entradaMedico;
     @FXML private Label entradaExame;
     @FXML private Label entradaValor;
     @FXML private Label entradaTelefone;
+    @FXML private Label entradaEquipamento;
     @FXML private Text entradaEspecificacoes;
+    @FXML private Label entradaData;
+    @FXML private Label entradaHorario;
 
-    @FXML private TextField edicaoValor;
-    @FXML private TextField edicaoMedico;
-    @FXML private TextField edicaoExame;
     @FXML private TextField edicaoCliente;
+    @FXML private TextField edicaoMedico;
     @FXML private TextField edicaoTelefone;
+    @FXML private TextField edicaoValor;
+    @FXML private TextField edicaoExame;
+    
     @FXML private TextArea edicaoEspecificacoes;
     
     @FXML private Button botaoEditar;
+    @FXML private Button botaoDesmarcar;
     
     @FXML
     private void botao_editar(ActionEvent event) {  
@@ -79,6 +79,18 @@ public class ExameController implements Initializable {
             entradaTelefone.setText(edicaoTelefone.getText());
             entradaEspecificacoes.setText(edicaoEspecificacoes.getText());
             
+            Exame exame = null;                    
+            for(Exame it : HomeController.exames){
+                if(Objects.equals(it.ref, entradaReferencia.getText())){
+                    it.paciente = edicaoCliente.getText();
+                    it.medico = edicaoMedico.getText();
+                    it.telefone = edicaoTelefone.getText();
+                    it.valor = edicaoValor.getText();
+                    it.forma_de_atendimento = edicaoExame.getText();
+                    it.especificacoes = edicaoEspecificacoes.getText();
+                }
+            }
+            
             entradaValor.setVisible(true);
             entradaExame.setVisible(true);
             entradaMedico.setVisible(true);
@@ -88,6 +100,19 @@ public class ExameController implements Initializable {
             
             botaoEditar.setText("Editar");
         }
+    }
+    
+    public void iniciar(String referencia, String paciente, String telefone, String data, String equipamento, String medico, String horario, String especificacoes, String valor, String forma_de_atendimento) {
+        entradaReferencia.setText(referencia);
+        entradaCliente.setText(paciente);
+        entradaMedico.setText(medico);
+        entradaTelefone.setText(telefone);
+        entradaValor.setText(valor);
+        entradaEquipamento.setText(equipamento);
+        entradaExame.setText(forma_de_atendimento);
+        entradaData.setText(data);
+        entradaHorario.setText(horario);
+        entradaEspecificacoes.setText(especificacoes);
     }
     
     @Override

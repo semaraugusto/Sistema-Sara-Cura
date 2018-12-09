@@ -1,13 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package drapo.dashboard;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -15,10 +8,8 @@ import java.util.logging.Logger;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 /**
- *
  * @author Henrique
  */
 public class JSON {    
@@ -35,7 +26,6 @@ public class JSON {
             } catch (IOException ex) {
                 Logger.getLogger(JSON.class.getName()).log(Level.SEVERE, null, ex);
             }
-            System.out.println("seilaoq");
         }
         else{
             try {
@@ -86,6 +76,53 @@ public class JSON {
     }
     
     public void escreveMedicos(){
+        try{
+            this.arquivo.write(this.saida.toString());
+            this.arquivo.flush();
+        } catch (IOException ex) {
+            Logger.getLogger(JSON.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void salvaConsulta(Consulta consulta){
+        this.write = new JSONObject();
+        this.write.put("ref", consulta.ref);
+        this.write.put("data", consulta.data);
+        this.write.put("forma_de_atendimento", consulta.forma_de_atendimento);
+        this.write.put("horario", consulta.horario);
+        this.write.put("medico", consulta.medico);
+        this.write.put("paciente", consulta.paciente);
+        this.write.put("telefone", consulta.telefone);
+        this.write.put("valor", consulta.valor);
+        this.saida.add(this.write);
+    }
+
+    public void escreveConsulta(){
+        try{
+            this.arquivo.write(this.saida.toString());
+            this.arquivo.flush();
+        } catch (IOException ex) {
+            Logger.getLogger(JSON.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void salvaExame(Exame exame){
+        this.write = new JSONObject();
+        this.write.put("data", exame.data);
+        this.write.put("equipamento", exame.equipamento);
+        this.write.put("especificacoes", exame.especificacoes);
+        this.write.put("forma_de_atendimento", exame.forma_de_atendimento);
+        this.write.put("horario", exame.horario);
+        this.write.put("medico", exame.medico);
+        this.write.put("paciente", exame.paciente);
+        this.write.put("ref", exame.ref);
+        this.write.put("telefone", exame.telefone);
+        this.write.put("valor", exame.valor);
+        this.saida.add(this.write);
+
+    }
+
+    public void escreveExame(){
         try{
             this.arquivo.write(this.saida.toString());
             this.arquivo.flush();

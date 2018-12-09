@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -36,7 +35,10 @@ public class HomeController implements Initializable {
     public static List<Medico> medicos;
     public static List<Equipamento> equipamentos;
     public static List<Consulta> consultas;
+    public static List<Exame> exames;
     public static JSON dadosMedicos;
+    public static JSON dadosConsultas;
+    public static JSON dadosExames;
     
     ObservableList<String> choicebox_hora_lista = FXCollections.observableArrayList("01", "02", "03");
     
@@ -79,12 +81,43 @@ public class HomeController implements Initializable {
         medicos = new ArrayList<>();
         equipamentos = new ArrayList<>();
         consultas = new ArrayList<>();
+        exames = new ArrayList<>();
         JSONParser parser = new JSONParser();
         
-        dadosMedicos = new JSON("medicos.json");
-        
-        
             try {
+                JSONArray ex = (JSONArray) parser.parse(new FileReader("exames.json"));
+                for(Object o : ex){
+                    JSONObject exame = (JSONObject) o;
+                    Exame exameTemp = new Exame();
+                    exameTemp.data = (String) exame.get("data");
+                    exameTemp.equipamento = (String) exame.get("equipamento");
+                    exameTemp.especificacoes = (String) exame.get("especificacoes");
+                    exameTemp.forma_de_atendimento = (String) exame.get("forma_de_atendimento");
+                    exameTemp.horario = (String) exame.get("horario");
+                    exameTemp.medico = (String) exame.get("medico");
+                    exameTemp.paciente = (String) exame.get("paciente");
+                    exameTemp.ref = (String) exame.get("ref");
+                    exameTemp.telefone = (String) exame.get("telefone");
+                    exameTemp.valor = (String) exame.get("valor");
+                    exames.add(exameTemp);
+                }
+                
+                JSONArray cons = (JSONArray) parser.parse(new FileReader("consultas.json"));
+                int i = 1;
+                for(Object o : cons){
+                    JSONObject consulta = (JSONObject) o;
+                    Consulta provisoria = new Consulta();
+                    provisoria.data = (String) consulta.get("data");
+                    provisoria.medico = (String) consulta.get("medico");
+                    provisoria.ref = "Ref: " + String.valueOf(i);
+                    provisoria.forma_de_atendimento = (String) consulta.get("forma_de_atendimento");
+                    provisoria.paciente = (String) consulta.get("paciente");
+                    provisoria.horario = (String) consulta.get("horario");
+                    provisoria.valor = (String) consulta.get("valor");
+                    provisoria.telefone = (String) consulta.get("telefone");
+                    consultas.add(provisoria);
+                    i++;
+                }
                 
                 JSONArray geral = (JSONArray) parser.parse(new FileReader("medicos.json"));
                 for(Object o : geral)
@@ -96,7 +129,7 @@ public class HomeController implements Initializable {
                     provisorio.horario = (int)(long) medico.get("horario");
                     provisorio.tempo = (int)(long) medico.get("tempo");
                     JSONArray dias = (JSONArray) medico.get("dias");
-                    int i = 0;
+                    i = 0;
                     for(Object d : dias){
                         provisorio.dias[i] = Boolean.valueOf(d.toString());
                         i++;
@@ -107,8 +140,6 @@ public class HomeController implements Initializable {
                     for(Object e : especialidades){
                         provisorio.especialidades.add((String)e);
                     }
-                    
-                    medicos.add(provisorio);
                     
                     JSONArray agenda = (JSONArray)medico.get("agenda");
                     i = 0;
@@ -125,15 +156,17 @@ public class HomeController implements Initializable {
                          dt.data = (String) teste.get("data");
                          provisorio.agenda.add(dt);              
                     }
-                    
-
+                   
                     medicos.add(provisorio);
                 }
-           
+            
             } catch (IOException | ParseException ex) {
                 Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
             }
-      
+            
+            dadosMedicos = new JSON("medicos.json");
+            dadosConsultas = new JSON("consultas.json");
+            dadosExames = new JSON("exames.json");
     }
     
     private void atualizar_consultas()
@@ -160,18 +193,19 @@ public class HomeController implements Initializable {
     {
         pnl_scroll.getChildren().clear();
         
-        Node [] nodes = new  Node[15];
+        Node node = null;
         
-        for(int i = 0; i<3; i++)
-        {
+        for(Exame it : HomeController.exames){
             try {
-               nodes[i] = (Node)FXMLLoader.load(getClass().getResource("Exame.fxml"));
-               pnl_scroll.getChildren().add(nodes[i]);
+               FXMLLoader loader = new FXMLLoader(getClass().getResource("Exame.fxml"));
+               node = (Node)loader.load();
+               ExameController controller = loader.getController();
+               controller.iniciar(it.ref, it.paciente, it.telefone, it.data, it.equipamento, it.medico, it.horario, it.especificacoes, it.valor, it.forma_de_atendimento);
+               pnl_scroll.getChildren().add(node);
                 
             } catch (IOException ex) {
                 Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
             }
-           
         }  
     }
     

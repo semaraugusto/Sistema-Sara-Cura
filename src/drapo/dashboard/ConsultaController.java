@@ -32,13 +32,15 @@ public class ConsultaController implements Initializable {
     
     @FXML
     private void botao_desmarcar(ActionEvent event) {  
+        Medico medico = null;
         Consulta consulta = null;                    
         for(Consulta it : HomeController.consultas){
-            if(Objects.equals(it.ref, entradaReferencia.getText())){
+            if(Objects.equals(it.ref, entradaReferencia.getText())){                
                 HomeController.consultas.remove(it);
                 break;
             }
         }
+        
         botaoEditar.setDisable(true);
         botaoDesmarcar.setDisable(true);
         botaoDesmarcar.setText("Desmarcada");            
@@ -119,5 +121,4 @@ public class ConsultaController implements Initializable {
         edicaoMedico.setVisible(false);
         edicaoCliente.setVisible(false);
     }   
-    
 }

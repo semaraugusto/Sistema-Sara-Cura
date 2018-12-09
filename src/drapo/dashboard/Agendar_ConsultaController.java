@@ -1,15 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package drapo.dashboard;
 
 import java.net.URL;
 import java.util.*;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -132,6 +126,8 @@ public class Agendar_ConsultaController implements Initializable {
         tf_telefone.setText("");
         tf_data.setText("");
         tf_valor.setText("");
+        tf_convenio.setText("");
+        tf_matricula.setText("");
         
         for(Medico it : HomeController.medicos){
             for(String itt : it.especialidades)
@@ -141,6 +137,7 @@ public class Agendar_ConsultaController implements Initializable {
         cb_especialidade.setItems(FXCollections.observableArrayList(especialidades));
         
         rb_particular.setSelected(true);
+        forma_de_atendimento = "Particular";
         particular_clique();
     }
     
@@ -424,17 +421,7 @@ public class Agendar_ConsultaController implements Initializable {
         cb_hora.setDisable(true);
         cb_min.setDisable(true);
         
-        List<String> especialidades = new ArrayList<>();
-        cb_medico.getItems().clear();
-        cb_especialidade.getItems().clear();
-        cb_hora.getItems().clear();
-        cb_min.getItems().clear();
-        
-        tf_cliente.setText("");
-        tf_telefone.setText("");
-        tf_data.setText("");
-        tf_valor.setText("");
-        
+        List<String> especialidades = new ArrayList<>();        
         for(Medico it : HomeController.medicos){
             for(String itt : it.especialidades)
                 if(!especialidades.contains(itt))

@@ -75,7 +75,7 @@
             <Pane layoutY="269.0" prefHeight="70.0" prefWidth="896.0" style="-fx-background-color: #F0F0F0;">
                <children>
                   <Separator layoutX="95.0" layoutY="23.0" orientation="VERTICAL" prefHeight="27.0" prefWidth="6.0" />
-                  <Button layoutX="107.0" layoutY="21.0" mnemonicParsing="false" text="Desmarcar" textFill="#fc0000">
+                  <Button fx:id="botaoDesmarcar" layoutX="107.0" layoutY="21.0" mnemonicParsing="false" text="Desmarcar" textFill="#fc0000">
                      <font>
                         <Font size="13.0" />
                      </font>
@@ -88,7 +88,7 @@
                </children>
             </Pane>
             <Separator layoutX="698.0" layoutY="37.0" orientation="VERTICAL" prefHeight="46.0" prefWidth="6.0" />
-            <Label layoutX="123.0" layoutY="48.0" text="Ref: 20178" textFill="#b2b0b0">
+            <Label fx:id="entradaReferencia" layoutX="123.0" layoutY="48.0" text="Ref: 20178" textFill="#b2b0b0">
                <font>
                   <Font size="14.0" />
                </font>
@@ -109,7 +109,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label layoutX="384.0" layoutY="139.0" text="Tomografia 1" textFill="#4d4c4c">
+            <Label fx:id="entradaEquipamento" layoutX="384.0" layoutY="139.0" text="Tomografia 1" textFill="#4d4c4c">
                <font>
                   <Font size="13.0" />
                </font>
@@ -125,22 +125,20 @@
                   <Font size="13.0" />
                </font>
             </Text>
+            <Label fx:id="entradaHorario" layoutX="710.0" layoutY="43.0" text="09:00" textFill="#aeacac">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="entradaData" layoutX="557.0" layoutY="43.0" text="10/12/2018" textFill="#aeacac">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
          </children>
          <effect>
             <DropShadow color="#d7d2d2" height="50.0" radius="24.5" width="50.0" />
          </effect>
       </Pane>
-      <Label layoutX="739.0" layoutY="53.0" text="09:00" textFill="#aeacac">
-         <font>
-            <Font name="System Bold" size="36.0" />
-         </font>
-      </Label>
-      <Label layoutX="643.0" layoutY="55.0" text="16" textFill="#aeacac">
-         <font>
-            <Font name="System Bold" size="36.0" />
-         </font>
-      </Label>
-      <Label layoutX="692.0" layoutY="63.0" text="NOV" textFill="#3a1c9d" />
-      <Label layoutX="692.0" layoutY="81.0" text="2018" textFill="#aeacac" />
    </children>
 </AnchorPane>

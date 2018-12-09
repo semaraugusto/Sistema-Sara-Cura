@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package drapo.dashboard;
 
 import java.net.URL;
@@ -25,6 +20,8 @@ public class Agendar_ExameController implements Initializable {
     
     boolean dataNaoUsada;
     String forma_de_atendimento;
+    String horario;
+    String equipamento;
     
     String arrMin15[] = {"00", "15", "30", "45"};
     String arrMin20[] = {"00", "20", "40"};
@@ -240,12 +237,200 @@ public class Agendar_ExameController implements Initializable {
             e.consume();
     }
     
+    @FXML
+    private void filtraMedicos(){
+        cb_medico.getItems().clear();
+        
+        String especialidade = "";
+        for(Equipamento it : HomeController.equipamentos){
+                if(Objects.equals(it.equipamento, cb_equipamento.getValue())){
+                    especialidade = it.especialidade;
+                    break;
+                }
+        }
+        
+        List<String> medicos = new ArrayList<>();
+        for(Medico it : HomeController.medicos){
+            for(String itt : it.especialidades)
+                if(Objects.equals(itt, especialidade) && dataOK(tf_data.getText(), it.dias))
+                    medicos.add(it.nome);
+        }
+        cb_medico.setItems(FXCollections.observableArrayList(medicos));
+        
+        cb_medico.setDisable(false);
+    }
+    
+    @FXML
+    private void filtraHora(){
+        horasDisponiveis.clear();
+        minsDisponiveis.clear();
+        Medico med = null;
+
+        for(Medico it : HomeController.medicos)
+            if(Objects.equals(it.nome, cb_medico.getValue()))
+                med = it;
+
+        if(med != null){
+            if(dataOK(tf_data.getText(), med.dias)){
+                int i;
+                for(i=med.horario;i<med.horario+6;i++)
+                    horasDisponiveis.add(arrHora[i]);
+                cb_hora.setItems(FXCollections.observableArrayList(horasDisponiveis));
+                cb_hora.setDisable(false);
+            }else{
+                filtraMedicos();
+            }
+        }
+    }
+    
+    @FXML
+    private void filtraMin(){
+        minsDisponiveis.clear();
+        Medico med = null;
+        int horaAtual, intervaloAtual;
+
+        for(Medico it : HomeController.medicos)
+            if(Objects.equals(it.nome, cb_medico.getValue()))
+                med = it;
+
+        if(med != null){
+            if(dataOK(tf_data.getText(), med.dias)){
+                for(DiaTrabalho dia : med.agenda){
+                    if(Objects.equals(dia.data, tf_data.getText())){
+                        horaAtual = 0;
+                        for(boolean hora[] : dia.horarios){
+                            if(Objects.equals(cb_hora.getValue(), arrHora[med.horario+horaAtual])){
+                                intervaloAtual = 0;
+                                for(boolean marcada : hora){
+                                    if(!marcada){
+                                        if(med.tempo == 15)
+                                            minsDisponiveis.add(arrMin15[intervaloAtual]);
+                                        else if(med.tempo == 20)
+                                            minsDisponiveis.add(arrMin20[intervaloAtual]);
+                                        else
+                                            minsDisponiveis.add(arrMin30[intervaloAtual]);
+                                    }
+                                    intervaloAtual++;
+                                }
+                            }
+                            horaAtual++;
+                        }
+                        dataNaoUsada = false;
+                    }
+                }
+                if(dataNaoUsada){
+                    if(med.tempo == 15)
+                        cb_min.setItems(FXCollections.observableArrayList(arrMin15));
+                    else if(med.tempo == 20)
+                        cb_min.setItems(FXCollections.observableArrayList(arrMin20));
+                    else
+                        cb_min.setItems(FXCollections.observableArrayList(arrMin30));
+                }else{
+                    cb_min.setItems(FXCollections.observableArrayList(minsDisponiveis));
+                }
+                cb_min.setDisable(false);
+            }else{
+                filtraMedicos();
+            }
+        }
+    }
+    
+    private void limpaCampos(){
+        dataNaoUsada = true;
+        cb_equipamento.setDisable(true);
+        cb_medico.setDisable(true);
+        cb_hora.setDisable(true);
+        cb_min.setDisable(true);
+        
+        List<String> especialidades = new ArrayList<>();
+        cb_medico.getItems().clear();
+        cb_equipamento.getItems().clear();
+        cb_hora.getItems().clear();
+        cb_min.getItems().clear();
+        
+        tf_cliente.setText("");
+        tf_telefone.setText("");
+        tf_data.setText("");
+        tf_valor.setText("");
+        tf_convenio.setText("");
+        tf_matricula.setText("");
+        
+        List<String> equipamentos = new ArrayList<>();
+        for(Equipamento it : HomeController.equipamentos){
+            if(!equipamentos.contains(it.equipamento))
+                    equipamentos.add(it.equipamento);
+        }
+        cb_equipamento.setItems(FXCollections.observableArrayList(equipamentos));
+        
+        rb_particular.setSelected(true);
+        forma_de_atendimento = "Particular";
+        particular_clique();
+    }
+    
+    @FXML
+    private void agendar_clique(){
+        if(entradaOK()){
+            if(rb_particular.isSelected()){
+                try{
+                    verificar_particular();
+                    Medico med = null;
+                    
+                    for(Medico it : HomeController.medicos)
+                        if(Objects.equals(it.nome, cb_medico.getValue()))
+                            med = it;
+                    
+                    if(med != null){
+                        if(dataOK(tf_data.getText(), med.dias)){
+                            med.marcaConsulta(tf_data.getText(), (String)cb_hora.getValue(), (String)cb_min.getValue());
+                            horario = (String)cb_hora.getValue() + ":" + (String)cb_min.getValue();
+                            Exame exame = new Exame(tf_cliente.getText(), tf_telefone.getText(), tf_data.getText(), (String)cb_equipamento.getValue(), (String)cb_medico.getValue(), horario, ta_especificacoes.getText(), tf_valor.getText(), forma_de_atendimento);
+                            HomeController.exames.add(exame);
+                            JOptionPane.showMessageDialog(null, "Exame agendado com sucesso!", "Sucesso", JOptionPane.PLAIN_MESSAGE);
+                            limpaCampos();
+                        }
+                    }else{
+                        JOptionPane.showMessageDialog(null, "Médico não cadastrado.", "Dados inconsistentes", JOptionPane.ERROR_MESSAGE);
+                    } 
+                }catch(Exception e){
+                    JOptionPane.showMessageDialog(null, "Pagamento recusado.", "Pagamento inconsistente", JOptionPane.ERROR_MESSAGE);
+                    limpaCampos();
+                }
+            }else{
+                try{
+                    verificar_convenio();
+                    Medico med = null;
+                    
+                    for(Medico it : HomeController.medicos)
+                        if(Objects.equals(it.nome, cb_medico.getValue()))
+                            med = it;
+                    
+                    if(med != null){
+                        if(dataOK(tf_data.getText(), med.dias)){
+                            med.marcaConsulta(tf_data.getText(), (String)cb_hora.getValue(), (String)cb_min.getValue());
+                            horario = (String)cb_hora.getValue() + ":" + (String)cb_min.getValue();
+                            Exame exame = new Exame(tf_cliente.getText(), tf_telefone.getText(), tf_data.getText(), (String)cb_equipamento.getValue(), (String)cb_medico.getValue(), horario, ta_especificacoes.getText(), tf_valor.getText(), forma_de_atendimento);
+                            HomeController.exames.add(exame);
+                            JOptionPane.showMessageDialog(null, "Exame agendado com sucesso!", "Sucesso", JOptionPane.PLAIN_MESSAGE);
+                            limpaCampos();
+                        }
+                    }else{
+                        JOptionPane.showMessageDialog(null, "Médico não cadastrado.", "Dados inconsistentes", JOptionPane.ERROR_MESSAGE);
+                    }                    
+                }catch(Exception e){
+                    JOptionPane.showMessageDialog(null, "Autorização pelo convênio " + tf_convenio.getText() + " para o cliente " + tf_cliente.getText() + " negada.", "Pagamento inconsistente", JOptionPane.ERROR_MESSAGE);
+                    limpaCampos();
+                }
+            }
+        }
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         dataNaoUsada = true;
         cb_medico.setDisable(true);
         cb_hora.setDisable(true);
         cb_min.setDisable(true);
+        cb_equipamento.setDisable(true);
         
         List<String> equipamentos = new ArrayList<>();
         for(Equipamento it : HomeController.equipamentos){
