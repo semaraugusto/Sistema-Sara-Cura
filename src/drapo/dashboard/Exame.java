@@ -20,7 +20,8 @@ public class Exame {
     
     Exame(String paciente, String telefone, String data, String equipamento, String medico, String horario, String especificacoes, String valor, String forma_de_atendimento){
         Exame.id++;
-        this.ref = "Ref: " + String.valueOf(Consulta.id);
+        this.ref = "Ref: " + String.valueOf(HomeController.counter2);
+        HomeController.counter2++;
         this.paciente = paciente;
         this.telefone = telefone;
         this.data = data;

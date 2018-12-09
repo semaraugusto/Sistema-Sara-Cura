@@ -32,6 +32,7 @@ import org.json.simple.parser.ParseException;
  */
 public class HomeController implements Initializable {    
     public static int counter;
+    public static int counter2;
     public static List<Medico> medicos;
     public static List<Equipamento> equipamentos;
     public static List<Consulta> consultas;
@@ -100,6 +101,7 @@ public class HomeController implements Initializable {
 
                 
                 JSONArray ex = (JSONArray) parser.parse(new FileReader("exames.json"));
+                int q = 1;
                 for(Object o : ex){
                     JSONObject exame = (JSONObject) o;
                     Exame exameTemp = new Exame();
@@ -110,10 +112,12 @@ public class HomeController implements Initializable {
                     exameTemp.horario = (String) exame.get("horario");
                     exameTemp.medico = (String) exame.get("medico");
                     exameTemp.paciente = (String) exame.get("paciente");
-                    exameTemp.ref = (String) exame.get("ref");
+                    exameTemp.ref = "Ref: " + String.valueOf(q);
                     exameTemp.telefone = (String) exame.get("telefone");
                     exameTemp.valor = (String) exame.get("valor");
                     exames.add(exameTemp);
+                    q++;
+                    counter2 = q;
                 }
                 
                 JSONArray cons = (JSONArray) parser.parse(new FileReader("consultas.json"));
